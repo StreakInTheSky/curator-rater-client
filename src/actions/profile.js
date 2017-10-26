@@ -37,3 +37,22 @@ export const createUser = (data) => dispatch => {
     .then(res => dispatch(createUserSuccess(res)))
     .catch(err => dispatch(createUserError(err)))
 }
+
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const loginUserSuccess = (data) => ({
+    type: LOGIN_USER_SUCCESS,
+    payload: data
+});
+
+export const LOGIN_USER_ERROR= 'LOGIN_USER_ERROR';
+export const loginUserError = (error) => ({
+    type: LOGIN_USER_ERROR,
+    payload: error
+});
+export const loginUser = (data) => dispatch => {
+  console.log(data)
+  // const url = `${API_BASE_URL}/auth/`;
+  // axios.post(url, data)
+  //   .then(res => dispatch(loginUserSuccess(res)))
+  //   .catch(err => dispatch(loginUserError(err)))
+}
