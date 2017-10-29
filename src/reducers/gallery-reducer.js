@@ -1,7 +1,7 @@
 import {
   FETCH_GALLERY_INFO_SUCCESS,
   FETCH_GALLERY_INFO_ERROR
-} from '../actions/user'
+} from '../actions/gallery'
 
 const initialState = {
   id: null,
