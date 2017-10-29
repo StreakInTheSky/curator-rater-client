@@ -1,8 +1,7 @@
 import React from 'react'
-import Transition from 'react-transition-group/Transition'
+// import Transition from 'react-transition-group/Transition'
 
 import InstagramImages from './view-instagram-images'
-import * as actions from '../../actions/curate'
 
 export default class CurateInstagram extends React.Component {
   constructor(props) {

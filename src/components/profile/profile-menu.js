@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import UserList from './userlist'
-
 export default function ProfileMenu(props) {
   return (
     <div className="profile-menu">

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import * as actions from '../../actions/curate'
-
 export default function Thumbnail(props) {
   const deleteImage = () => {
     props.deleteImage(props.index);
@@ -21,7 +19,7 @@ export default function Thumbnail(props) {
   return (
       <div className={ checkIfSelected() ? "thumbnail-container selected" : "thumbnail-container"} style={styles.imageContainer} onClick={viewImage} >
         <span className="image-delete" style={styles.delete} onClick={deleteImage}>&#10005;</span>
-        <img className="thumbnail" src={props.src} style={styles.image} />
+        <img className="thumbnail" src={props.src} style={styles.image} alt="" />
       </div>
 
   )

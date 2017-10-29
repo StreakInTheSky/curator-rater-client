@@ -6,8 +6,8 @@ import './header.css'
 import LoginForm from './login-form';
 
 export function Header(props) {
-  //
-  const mainNav = props.loggedIn ? <button>Sign Out</button> : <LoginForm />
+  const mainNav = props.loggedIn ? <button>Sign Out</button> : <LoginForm />;
+
   return (
     <header className="page-topper">
       <Link to="/" className="header-logo"><h1>Curator-Rater</h1></Link>

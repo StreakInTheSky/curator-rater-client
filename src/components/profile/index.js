@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Route } from 'react-router-dom'
 
 import * as actions from '../../actions/profile'
@@ -9,13 +8,9 @@ import Gallery from '../gallery'
 import UserList from './userlist'
 
 export class UserProfile extends React.Component {
-  constructor(props){
-    super(props)
-  }
-
   componentWillMount() {
-    this.props.actions.fetchUserInfo(this.props.match.params.username);
- }
+    this.props.dispatch(actions.fetchUserInfo(this.props.match.params.username));
+  }
 
   render() {
     const user = this.props.profile;
@@ -41,12 +36,8 @@ export class UserProfile extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actions, dispatch) }
-}
-
 function mapStateToProps(state, props) {
   return { profile: state.profile }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+export default connect(mapStateToProps)(UserProfile)

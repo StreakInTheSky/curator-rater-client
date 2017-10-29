@@ -1,7 +1,5 @@
 import React from 'react'
 
-import * as actions from '../../actions/curate'
-
 export default class Thumbnail extends React.Component {
   constructor(props) {
     super(props)
@@ -23,7 +21,7 @@ export default class Thumbnail extends React.Component {
   render(){
     return (
       <div className={ this.state.selected ? "thumbnail-container selected" : "thumbnail-container"} style={styles.imageContainer} >
-        <img className="thumbnail" src={this.props.src} style={styles.image} onClick={this.toggleSelectImage} />
+        <img className="thumbnail" src={this.props.src} alt="" style={styles.image} onClick={this.toggleSelectImage} />
       </div>
     )
   }

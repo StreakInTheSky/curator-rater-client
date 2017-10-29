@@ -7,7 +7,7 @@ export default function Thumbnail(props) {
 
   return (
     <div className={props.selected ? "thumbnail-container selected" : "thumbnail-container"}>
-      <img className="thumbnail" src={props.src} onClick={toggleSelectImage} />
+      <img className="thumbnail" src={props.src} onClick={toggleSelectImage} alt="" />
     </div>
   )
 }

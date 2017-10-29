@@ -6,10 +6,6 @@ import { Control, Form } from 'react-redux-form'
 import * as actions from '../actions/auth';
 
 export class LoginForm extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   login(info) {
     this.props.dispatch(actions.loginUser(info))
   }
