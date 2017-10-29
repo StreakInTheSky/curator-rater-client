@@ -11,7 +11,6 @@ export default function App(props) {
   return (
     <div className="container">
       <Header />
-        {/* TODO: Create browse component to render on home page */}
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/signup" component={RegistrationPage} />
