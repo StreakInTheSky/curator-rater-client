@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { Control, Form } from 'react-redux-form'
 
-import * as actions from '../actions/profile';
+import * as actions from '../actions/auth';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export class Login extends React.Component {
           <label htmlFor="login-email">email:</label>
           <Control.text model="forms.login.email" id="login-email" />
           <label htmlFor="login-password">password:</label>
-          <Control.text model="forms.login.password" id="login-password" />
+          <Control type="password" model="forms.login.password" id="login-password" />
           <button type="submit">login</button>
         </Form>
         <div>
