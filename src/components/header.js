@@ -1,22 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import './header.css'
 
-export default class Header extends React.Component {
-  constructor(props){
-    super(props)
-  }
+import LoginForm from './login-form';
 
-  render() {
-    return (
-      <header className="page-topper">
-        <Link to="/" className="header-logo"><h1>Curator-Rater</h1></Link>
-        {/* <MainNav /> */}
-        {/* <ProfileMenu /> */}
-        <Link to="/login" className="mock-button">login</Link>
-      </header>
-    )
-  }
+export function Header(props) {
+  //
+  const mainNav = props.loggedIn ? <button>Sign Out</button> : <LoginForm />
+  return (
+    <header className="page-topper">
+      <Link to="/" className="header-logo"><h1>Curator-Rater</h1></Link>
+      {mainNav}
+    </header>
+  )
 }
+
+const mapStateToProps = state => ({
+    loggedIn: state.auth.currentUser !== null
+});
+
+export default connect(mapStateToProps)(Header);

@@ -5,7 +5,7 @@ import { Control, Form } from 'react-redux-form'
 
 import * as actions from '../actions/auth';
 
-export class Login extends React.Component {
+export class LoginForm extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -25,13 +25,13 @@ export class Login extends React.Component {
           <button type="submit">login</button>
         </Form>
         <div>
-          <Link to={'/signup/'}>
-            Sign up with new account
-          </Link>
+          <p>
+            or <Link to={'/signup'}>Sign Up</Link>
+          </p>
         </div>
       </div>
     )
   }
 }
 
-export default connect()(Login);
+export default connect()(LoginForm);

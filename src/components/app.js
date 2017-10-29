@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import Header from './header';
-import Login from './login';
-import UserRegistration from './user-registration'
+import Home from './home';
+import RegistrationPage from './user-registration-page';
 import UserProfile from './profile';
 import CurateContainer from './curate';
 
@@ -13,8 +13,8 @@ export default function App(props) {
       <Header />
         {/* TODO: Create browse component to render on home page */}
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={UserRegistration} />
+        <Route exact path="/" component={Home}/>
+        <Route path="/signup" component={RegistrationPage} />
         <Route path="/curate" component={CurateContainer} />
         <Route path="/:username" component={UserProfile} />
       </Switch>

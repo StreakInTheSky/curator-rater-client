@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import {API_BASE_URL} from '../config.js';
 
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -12,8 +13,8 @@ export const loginUserError = (error) => ({
     type: LOGIN_USER_ERROR,
     payload: error
 });
+
 export const loginUser = (data) => dispatch => {
-  console.log(data)
   const credentials = {
     username: data.email,
     password: data.password
@@ -23,6 +24,13 @@ export const loginUser = (data) => dispatch => {
   axios.post(url, null, {
       auth: credentials
     })
-    .then(res => dispatch(loginUserSuccess(res)))
+    .then(res => {
+      const decodedToken = jwtDecode(res.data.authToken)
+      const data = {
+        authToken: res.data.authToken,
+        user: decodedToken.user
+      }
+      dispatch(loginUserSuccess(data))
+    })
     .catch(err => dispatch(loginUserError(err)))
 }

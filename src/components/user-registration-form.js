@@ -1,25 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Control, Form, Errors, model } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 
 import * as actions from '../actions/profile';
+// import { loginUser } from '../actions/auth';
 
-export class UserRegistration extends React.Component {
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   password: null,
-    //   passwordConfirm: null
-    // }
-
-    // this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this)
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     password: nextProps.password,
-  //     passwordConfirm: nextProps.passwordConfirm
-  //   })
+export class RegistrationForm extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  //
+  //   this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this)
   // }
 
   // checkPasswordsMatch(val) {
@@ -28,7 +18,12 @@ export class UserRegistration extends React.Component {
 
 
   registerUser(values){
-    this.props.dispatch(actions.createUser(values))
+    this.props
+      .dispatch(actions.createUser(values))
+      // .then(() => this.props.dispatch(loginUser({
+      //   email: values.email,
+      //   password: values.password
+      // })))
   }
 
   render() {
@@ -116,9 +111,5 @@ export class UserRegistration extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  password: state.forms.register.password,
-  // passwordConfirm: state.forms.register.passwordConfirm
-});
 
-export default connect(mapStateToProps)(UserRegistration);
+export default connect()(RegistrationForm);
