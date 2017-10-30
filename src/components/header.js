@@ -7,6 +7,8 @@ import { clearAuthToken } from '../local-storage';
 
 import './header.css'
 
+import AccountMenu from './account-menu'
+
 export class Header extends React.Component{
   logOut() {
     this.props.dispatch(setCurrentUser(null));
@@ -17,24 +19,26 @@ export class Header extends React.Component{
   render() {
     const loginButton = <Link to="/login" className="mock-button">Login</Link>
     const signUpButton = <Link to="/signup" className="mock-button">Sign Up</Link>
-    const logOutButton = <button onClick={()=>this.logOut()}>Log Out</button>
-    let accountNav;
+    // const logOutButton = <button onClick={()=>this.logOut()}>Log Out</button>
+    let accountMenu;
+    let addGalleryLink;
 
     if (this.props.loggedIn) {
-      accountNav = logOutButton
+      accountMenu = <AccountMenu logOut={() => this.logOut()} />
+      addGalleryLink = <Link to="/curate">Create Gallery</Link>
     } else if (this.props.location.pathname === '/login') {
-      accountNav = signUpButton
+      accountMenu = signUpButton
     } else if (this.props.location.pathname === '/signup') {
-      accountNav = loginButton
+      accountMenu = loginButton
     } else {
-      accountNav = <div>{loginButton} or {signUpButton}</div>
+      accountMenu = <div>{loginButton} or {signUpButton}</div>
     }
-    // const accountNav = this.props.loggedIn ? logOutButton : loginButton;
 
     return (
       <header className="page-topper">
         <Link to="/" className="header-logo"><h1>Curator-Rater</h1></Link>
-        {accountNav}
+        {addGalleryLink}
+        {accountMenu}
       </header>
     )
   }
