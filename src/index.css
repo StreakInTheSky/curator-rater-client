@@ -13,6 +13,15 @@ h1{ font-size: 2em }
 h2{ font-size: 1.5em }
 h3{ font-size: 1.25em }
 
+a {
+  color: #AAA;
+}
+
+a:hover {
+  color: #DDD;
+  background-color: #444;
+}
+
 button, .mock-button {
   padding: 5px;
   background-color: white;
@@ -36,6 +45,7 @@ button:hover, .mock-button:hover {
   background-color: grey;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 button:disabled, button[disabled]:hover {

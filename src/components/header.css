@@ -3,7 +3,35 @@
   bottom: 0;
 }
 
+.logo-link {
+  position: relative;
+}
+
 .header-logo {
-  text-decoration: none;
   color: #000;
+  background-color: #FFF;
+}
+
+.header-logo:hover {
+
+}
+
+.logo-link:hover {
+  background-color: #FFF;
+}
+
+.home-text {
+  position: absolute;
+  right: 80%;
+  bottom: 10px;
+  text-decoration: underline;
+}
+
+.logo-link:hover span {
+  display:none;
+}
+
+.logo-link:hover .header-logo {
+  text-decoration: underline;
+  text-decoration-color: #5bc7a0;
 }

@@ -19,7 +19,7 @@ export class Header extends React.Component{
   render() {
     const loginButton = <Link to="/login" className="mock-button">Login</Link>
     const signUpButton = <Link to="/signup" className="mock-button">Sign Up</Link>
-    // const logOutButton = <button onClick={()=>this.logOut()}>Log Out</button>
+
     let accountMenu;
     let addGalleryLink;
 
@@ -36,7 +36,7 @@ export class Header extends React.Component{
 
     return (
       <header className="page-topper">
-        <Link to="/" className="header-logo"><h1>Curator-Rater</h1></Link>
+        <Link to="/" className="logo-link"><h1 className="header-logo">Curator-Rater</h1><span className="home-text">home</span></Link>
         {addGalleryLink}
         {accountMenu}
       </header>
