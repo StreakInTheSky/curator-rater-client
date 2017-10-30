@@ -16,7 +16,7 @@ export function RegistrationPage(props) {
             <RegistrationForm />
             <div>
               <p>
-                or <Link to={'/signup'}>Sign Up</Link>
+                or <Link to={'/login'}>Login</Link>
               </p>
             </div>
         </main>
