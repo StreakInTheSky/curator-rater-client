@@ -16,15 +16,6 @@ export const setCurrentUser = (user) => ({
   user
 })
 
-const decodeToken = (authToken) => jwtDecode(authToken)
-
-const storeAuthInfo = (authToken, dispatch) => {
-  const decodedToken = jwtDecode(authToken);
-  dispatch(setAuthToken(authToken));
-  dispatch(setCurrentUser(decodedToken.user));
-  saveAuthToken(authToken);
-}
-
 export const loginUser = (data) => dispatch => {
   const credentials = {
     username: data.email,

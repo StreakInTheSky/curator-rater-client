@@ -48,8 +48,6 @@ export class App extends React.Component {
   }
 
   render() {
-    this.props.hasAuthToken ? console.log('has auth token') : null;
-    this.props.loggedIn ? console.log('is logged in') : null;
     return (
       <div className="container">
         <Header />
