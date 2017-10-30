@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import Header from './header';
 import Home from './home';
@@ -8,17 +9,68 @@ import RegistrationPage from './user-registration-page';
 import UserProfile from './profile';
 import CurateContainer from './curate';
 
-export default function App(props) {
-  return (
-    <div className="container">
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={RegistrationPage} />
-        <Route path="/curate" component={CurateContainer} />
-        <Route path="/:username" component={UserProfile} />
-      </Switch>
-    </div>
-  );
+import { refreshAuthToken } from '../actions/auth';
+
+export class App extends React.Component {
+  componentDidMount() {
+    if (this.props.hasAuthToken) {
+      // Try to get a fresh auth token if we had an existing one in
+      // localStorage
+      this.props.dispatch(refreshAuthToken());
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn && !this.props.loggedIn) {
+      // When we are logged in, refresh the auth token periodically
+      this.startPeriodicRefresh();
+    } else if (!nextProps.loggedIn && this.props.loggedIn) {
+      // Stop refreshing when we log out
+      this.stopPeriodicRefresh();
+    }
+  }
+
+  componentWillUnmount() {
+    this.stopPeriodicRefresh();
+  }
+
+  startPeriodicRefresh() {
+    this.refreshInterval = setInterval(() => this.props.dispatch(refreshAuthToken()), 60 * 60 * 1000 // One hour
+    );
+  }
+
+  stopPeriodicRefresh() {
+    if (!this.refreshInterval) {
+      return;
+    }
+
+    clearInterval(this.refreshInterval);
+  }
+
+  render() {
+    this.props.hasAuthToken ? console.log('has auth token') : null;
+    this.props.loggedIn ? console.log('is logged in') : null;
+    return (
+      <div className="container">
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={RegistrationPage} />
+          <Route path="/curate" component={CurateContainer} />
+          <Route path="/:username" component={UserProfile} />
+        </Switch>
+        {/* TODO: add footer */}
+      </div>
+    );
+  }
 }
+
+
+const mapStateToProps = state => ({
+    hasAuthToken: state.auth.authToken !== null,
+    loggedIn: state.auth.currentUser !== null
+});
+
+// Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
+export default withRouter(connect(mapStateToProps)(App));

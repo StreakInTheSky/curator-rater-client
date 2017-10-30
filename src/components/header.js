@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './header.css'
 
-import LoginForm from './login-form';
-
 export function Header(props) {
   const loginButton = <Link to="/login" className="mock-button">Login</Link>
   const signUpButton = <Link to="/signup" className="mock-button">SignUp</Link>

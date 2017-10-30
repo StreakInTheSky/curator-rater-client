@@ -1,6 +1,6 @@
 import {
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR
+  SET_AUTH_TOKEN,
+  SET_CURRENT_USER
 } from '../actions/auth'
 
 const initialState = {
@@ -9,13 +9,10 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-  if (action.type === LOGIN_USER_SUCCESS) {
-    return Object.assign({}, state, {
-      authToken: action.payload.authToken,
-      currentUser: action.payload.user
-    })
-  } else if (action.type === LOGIN_USER_ERROR) {
-    console.log(action.payload)
+  if (action.type === SET_AUTH_TOKEN) {
+    return Object.assign({}, state, { authToken: action.authToken })
+  } else if (action.type === SET_CURRENT_USER) {
+    return Object.assign({}, state, { currentUser: action.user })
   }
 
   return state;
