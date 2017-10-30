@@ -4,8 +4,6 @@ import {
   DELETE_IMAGE,
   VIEW_IMAGE,
   UNVIEW_IMAGE,
-  ADD_TITLE,
-  ADD_DESCRIPTION,
   ADD_TAG,
   REMOVE_TAG,
   SUBMIT_GALLERY_SUCCESS,
@@ -13,12 +11,9 @@ import {
 } from '../actions/curate'
 
 const initialState = {
-  title: '',
-  description: '',
   addedImages: [],
   currentImage: null,
-  tags: [],
-  user: '595d9aaf960cfd0c66492386'
+  tags: []
 }
 
 export default function(state = initialState, action) {
@@ -34,10 +29,6 @@ export default function(state = initialState, action) {
     return Object.assign({}, state, { currentImage: state.addedImages[action.payload] })
   } else if (action.type === UNVIEW_IMAGE) {
     return Object.assign({}, state, { currentImage: null })
-  } else if (action.type === ADD_TITLE) {
-    return Object.assign({}, state, { title: action.payload })
-  } else if (action.type === ADD_DESCRIPTION) {
-    return Object.assign({}, state, { description: action.payload })
   } else if (action.type === ADD_TAG) {
     const newTag = { key: action.key, text: action.tag}
     return Object.assign({}, state, { tags: [...state.tags, newTag] })

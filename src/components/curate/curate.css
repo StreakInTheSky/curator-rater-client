@@ -1,0 +1,31 @@
+.thumbnail-container {
+  display: inline-block;
+  position: relative;
+  min-width: 100px;
+  min-height: 100px;
+  margin: 0 3px;
+}
+
+.image-delete {
+  display: inline-block;
+  position: absolute;
+  top: -9px;
+  right: -6px;
+  z-index: 3;
+  cursor:default;
+}
+
+.image-delete:hover {
+  color: var(--high-light-color);
+}
+
+.thumbnail {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.form-section {
+  width: 100%;
+}

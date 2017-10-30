@@ -43,18 +43,6 @@ export const unviewImage = () => ({
   type: UNVIEW_IMAGE
 });
 
-export const ADD_TITLE = 'ADD_TITLE';
-export const addTitle = (title) => ({
-  type: ADD_TITLE,
-  payload: title
-});
-
-export const ADD_DESCRIPTION = 'ADD_DESCRIPTION';
-export const addDescription = (description) => ({
-  type: ADD_DESCRIPTION,
-  payload: description
-});
-
 export const ADD_TAG = 'ADD_TAG';
 export const addTag = (key, tag) => ({
   type: ADD_TAG,
@@ -80,24 +68,26 @@ export const submitGalleryError = (error) => ({
     payload: error
 });
 
-export const submitGallery = ({user, title, description, addedImages}) => dispatch => {
-  const gallery = {
-    user,
-    title,
-    description
+export const submitGallery = gallery => dispatch => {
+  console.log(gallery)
+  const {title, description, images, user} = gallery
+  const galleryDetails = {
+    title, description, user
   }
-  axios.post(`${API_BASE_URL}/gallery/`, { data: gallery })
+  axios.post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
   .then(res => {
-    return Promise.all(addedImages.map(image => {
-      const imageData = {
-        path: image,
-        gallery: res.data.id,
-        user: res.data.user
-      }
-      return axios.post(`${API_BASE_URL}/image/`, { data: imageData })
-        .catch(error => dispatch(submitGalleryError(error)))
-    }))
+      console.log(res)
+      return;
+    // return Promise.all(addedImages.map(image => {
+    //   const imageData = {
+    //     path: image,
+    //     gallery: res.data.id,
+    //     user: res.data.user
+    //   }
+    //   return axios.post(`${API_BASE_URL}/image/`, { data: imageData })
+    //     .catch(error => dispatch(submitGalleryError(error)))
+    // }))
   })
-  .then(() => dispatch(submitGallerySuccess()))
-  .catch(error => dispatch(submitGalleryError(error)));
+  // .then(() => dispatch(submitGallerySuccess()))
+  // .catch(error => dispatch(submitGalleryError(error)));
 };

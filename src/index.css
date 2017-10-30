@@ -1,5 +1,12 @@
 
 /* Global Styles */
+:root {
+  --text-color: #000;
+  --light-grey: #AAA;
+  --dark-grey: #444;
+  --high-light-color: #5bc7a0;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }

@@ -8,6 +8,8 @@ import CurateFetch from './curate-fetch'
 import CurateDetails from './curate-details'
 import * as actions from '../../actions/curate'
 
+import './curate.css';
+
 export class CurateContainer extends React.Component {
   constructor(props) {
     super(props)
