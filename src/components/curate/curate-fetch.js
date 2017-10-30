@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CurateInstagram from './instagram'
+// import CurateInstagram from './instagram'
 import CurateUrl from './url'
 import CurateUpload from './upload'
 import * as actions from '../../actions/curate'
@@ -24,9 +24,9 @@ export class CurateFetch extends React.Component {
       <div className="curate-contents curate-fetch transition-item">
         <section className="curate-form-group">
           <div className="page-description">
-            <p>Search Instagram by username/hashtag, upload, or enter the url of the images you want to add to the gallery.</p>
+            <p>Upload, or enter the url of the images you want to add to the gallery.</p>
           </div>
-          <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
+          {/* <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/> */}
           <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
         </section>
