@@ -1,9 +1,8 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom'
 import {loginUser} from '../actions/auth';
 import Input from './input';
-import {required} from '../validators';
 
 export class LoginForm extends React.Component {
     onSubmit(values) {
@@ -11,8 +10,11 @@ export class LoginForm extends React.Component {
     }
 
     render() {
+        const errorMessage = this.props.error ? <p className="error-message">{this.props.error}</p> : null
+
         return (
           <div className="login-container">
+            {errorMessage}
             <form
               className="login-form"
               onSubmit={this.props.handleSubmit(values =>
@@ -20,16 +22,14 @@ export class LoginForm extends React.Component {
               )}>
               <label htmlFor="email">email</label>
               <Field component={Input}
-                type="email"
+                type="text"
                 name="email"
-                validate={[required]}
               />
               <label htmlFor="password">Password</label>
               <Field
                 component={Input}
                 type="password"
                 name="password"
-                validate={[required]}
               />
               <button
                 type="submit"
@@ -48,7 +48,5 @@ export class LoginForm extends React.Component {
 }
 
 export default reduxForm({
-    form: 'login',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('login', Object.keys(errors)[0]))
+  form: 'login'
 })(LoginForm);

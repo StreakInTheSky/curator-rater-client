@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import {SubmissionError} from 'redux-form'
 import {API_BASE_URL} from '../config.js';
 
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -21,7 +22,7 @@ export const loginUser = (data) => dispatch => {
   }
 
   const url = `${API_BASE_URL}/auth/login`;
-  axios.post(url, null, {
+  return axios.post(url, null, {
       auth: credentials
     })
     .then(res => {
@@ -31,6 +32,20 @@ export const loginUser = (data) => dispatch => {
         user: decodedToken.user
       }
       dispatch(loginUserSuccess(data))
+      return Promise.resolve(data.user)
     })
-    .catch(err => dispatch(loginUserError(err)))
+    .catch(err => {
+      if (err.response.status === 401) {
+        return Promise.reject(
+          new SubmissionError({
+            _error: 'Incorrect username or password'
+          })
+        )
+      }
+      return Promise.reject(
+        new SubmissionError({
+          [err.response.status]: err.response.statusText
+        })
+      )
+    })
 }

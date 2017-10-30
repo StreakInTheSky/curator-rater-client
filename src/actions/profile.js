@@ -45,8 +45,7 @@ export const createUser = (data) => dispatch => {
         // It's a less informative error returned by express
         return Promise.reject(
           new SubmissionError({
-            code: err.response.status,
-            message: err.response.statusText
+            [err.response.status]: err.response.statusText
           })
         );
     })
