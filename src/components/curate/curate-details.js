@@ -73,7 +73,7 @@ export class CurateDetails extends React.Component {
           <button
             type="submit"
             form="gallery-details"
-            disabled={((this.props.images.length > 0) && this.props.pristine) || this.props.submitting}
+            disabled={(this.props.images.length === 0 || this.props.pristine) || this.props.submitting}
           >Post Gallery</button>
         </nav>
       </div>
