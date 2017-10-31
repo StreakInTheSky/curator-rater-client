@@ -120,6 +120,7 @@ export const submitGallery = galleryData => dispatch => {
       })
     })
     .then(() => Promise.resolve())
+    .then(() => dispatch(submitGallerySuccess()))
     .catch(err => {
       if (
           err.response.headers['content-type'] &&

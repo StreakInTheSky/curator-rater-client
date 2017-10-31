@@ -12,7 +12,8 @@ import {
 const initialState = {
   addedImages: [],
   currentImage: null,
-  tags: []
+  tags: [],
+  isSubmitted: false
 }
 
 export default function(state = initialState, action) {
@@ -36,7 +37,7 @@ export default function(state = initialState, action) {
     tags.splice(action.payload, 1)
     return Object.assign({}, state, { tags: tags })
   } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
-    console.log("Gallery successfully created")
+    return Object.assign({}, state, { isSubmitted: true })
     // TODO: Go to Dashboard
   }
 
