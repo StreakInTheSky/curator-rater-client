@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { SubmissionError } from 'redux-form';
+import AWS from 'aws-sdk';
 import {API_BASE_URL} from '../config.js'
 
 export const FETCH_IMAGE_SUCCESS = 'FETCH_IMAGE_SUCCESS';
@@ -62,32 +64,82 @@ export const submitGallerySuccess = (data) => ({
     payload: data
 });
 
-export const SUBMIT_GALLERY_ERROR= 'SUBMIT_GALLERY_ERROR';
-export const submitGalleryError = (error) => ({
-    type: SUBMIT_GALLERY_ERROR,
-    payload: error
-});
+// TODO: Get more secure way to get credentials
 
-export const submitGallery = gallery => dispatch => {
-  console.log(gallery)
-  const {title, description, images, user} = gallery
-  const galleryDetails = {
-    title, description, user
+const s3 = new AWS.S3({
+  apiVersion: '2006-03-01',
+  region: 'us-west-1',
+  accessKeyId: 'AKIAJUROSBMKQBFZSB2A',
+  secretAccessKey: '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',
+  params: { Bucket: 'curator-rater-images' }
+})
+
+const uploadToS3 = (image, key, type) => {
+  const params = {
+    ACL: 'public-read',
+    Key: key,
+    Body: image,
+    ContentEncoded: 'base64',
+    ContentType: type
   }
-  axios.post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
-  .then(res => {
-      console.log(res)
-      return;
-    // return Promise.all(addedImages.map(image => {
-    //   const imageData = {
-    //     path: image,
-    //     gallery: res.data.id,
-    //     user: res.data.user
-    //   }
-    //   return axios.post(`${API_BASE_URL}/image/`, { data: imageData })
-    //     .catch(error => dispatch(submitGalleryError(error)))
-    // }))
-  })
-  // .then(() => dispatch(submitGallerySuccess()))
-  // .catch(error => dispatch(submitGalleryError(error)));
+  const uploader = s3.upload(params)
+  return uploader.promise()
+    .then(data => { return data.Location },
+          err => { return Promise.reject(err) }
+    )
+    .then(location => Promise.resolve(location))
+    .catch(err => Promise.reject(err))
+}
+
+const uploadGalleryImage = (imageData) => {
+  return axios
+    .post(`${API_BASE_URL}/image/`, imageData)
+    .then(res => Promise.resolve(res))
+    .catch(error => Promise.reject(error))
+}
+
+
+export const submitGallery = galleryData => dispatch => {
+  const {title, description, images, user} = galleryData
+  const galleryDetails = { title, description, user }
+  let gallery
+
+  return axios
+    .post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
+    .then(res => {
+      gallery = res.data.id
+      let counter = 0;
+      images.forEach(image => {
+        counter++;
+        return fetch(image)
+          .then(res => res.blob())
+          .then(blob => uploadToS3(blob, `${user}${Date.now()}${counter}`, blob.type))
+          .then(path => uploadGalleryImage({ path, user, gallery }))
+          .then(res => Promise.resolve(res))
+          .catch(err => Promise.reject(err))
+      })
+    })
+    .then(() => Promise.resolve())
+    .catch(err => {
+      if (
+          err.response.headers['content-type'] &&
+          err.response.headers['content-type'].startsWith('application/json')
+      ) {
+          const {reason, message, location} = err.response.data;
+          if (reason === 'ValidationError') {
+            // Convert ValidationErrors into SubmissionErrors for Redux Form
+            return Promise.reject(
+              new SubmissionError({
+                [location]: message
+              })
+            );
+          }
+        }
+        // It's a less informative error returned by express
+        return Promise.reject(
+          new SubmissionError({
+            [err.response.status]: err.response.statusText
+          })
+        );
+    })
 };

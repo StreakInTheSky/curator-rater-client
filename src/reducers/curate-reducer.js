@@ -6,8 +6,7 @@ import {
   UNVIEW_IMAGE,
   ADD_TAG,
   REMOVE_TAG,
-  SUBMIT_GALLERY_SUCCESS,
-  SUBMIT_GALLERY_ERROR
+  SUBMIT_GALLERY_SUCCESS
 } from '../actions/curate'
 
 const initialState = {
@@ -38,11 +37,8 @@ export default function(state = initialState, action) {
     return Object.assign({}, state, { tags: tags })
   } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
     console.log("Gallery successfully created")
-    // Go to Dashboard
-  } else if (action.type === SUBMIT_GALLERY_ERROR) {
-    console.error(action.payload)
+    // TODO: Go to Dashboard
   }
-
 
   return state
 }
