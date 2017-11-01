@@ -108,16 +108,13 @@ export const submitGallery = galleryData => dispatch => {
     .post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
     .then(res => {
       gallery = res.data.id
-      let counter = 0;
-      images.forEach(image => {
-        counter++;
+      const imagePromises = images.map((image, index) => {
         return fetch(image)
           .then(res => res.blob())
-          .then(blob => uploadToS3(blob, `${user}${Date.now()}${counter}`, blob.type))
+          .then(blob => uploadToS3(blob, `${user}${Date.now()}${index}`, blob.type))
           .then(path => uploadGalleryImage({ path, user, gallery }))
-          .then(res => Promise.resolve(res))
-          .catch(err => Promise.reject(err))
-      })
+        })
+      return Promise.all(imagePromises)
     })
     .then(() => Promise.resolve())
     .then(() => dispatch(submitGallerySuccess()))
