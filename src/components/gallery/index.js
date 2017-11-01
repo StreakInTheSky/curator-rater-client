@@ -3,6 +3,8 @@ import React from 'react';
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
 
+import './gallery.css'
+
 export default class Gallery extends React.Component {
   constructor(props) {
     super(props)
@@ -31,8 +33,10 @@ export default class Gallery extends React.Component {
           <p className="gallery-description">{description}</p>
           {/* <Hashtags tags={tags} /> */}
         </div>
-        <ImageViewer image={this.state.currentImage}/>
-        <GalleryCollection images={images} viewImage={this.viewImage}/>
+        <div className="gallery-images">
+          <ImageViewer image={this.state.currentImage}/>
+          <GalleryCollection images={images} viewImage={this.viewImage}/>
+        </div>
       </div>
     )
   }

@@ -7,6 +7,8 @@ import ProfileMenu from './profile-menu'
 import Gallery from '../gallery'
 import UserList from './userlist'
 
+import './profile.css'
+
 export class UserProfile extends React.Component {
   componentWillMount() {
     this.props.dispatch(actions.fetchUserInfo(this.props.match.params.username));
@@ -36,8 +38,8 @@ export class UserProfile extends React.Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  return { profile: state.profile }
-}
+const mapStateToProps = (state, props) => ({
+  profile: state.profile
+});
 
 export default connect(mapStateToProps)(UserProfile)
