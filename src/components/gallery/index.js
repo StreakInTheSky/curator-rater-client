@@ -21,7 +21,6 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    console.log(this.props.gallery)
     const {title, description, username, images} = this.props.gallery
 
     return (
