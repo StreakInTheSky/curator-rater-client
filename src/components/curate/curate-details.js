@@ -27,13 +27,7 @@ export class CurateDetails extends React.Component {
       user: this.props.user.id
     }
     return this.props.dispatch(actions.submitGallery(gallery))
-      .then()
-  }
-
-  componentWillReceiveProps(props) {
-    if (props.galleryCreated) {
-      props.history.push(`/${this.props.user.username}`)
-    }
+      .then(()=>this.props.history.push(`/${this.props.user.username}`))
   }
 
   render() {
@@ -90,7 +84,7 @@ export class CurateDetails extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   images: state.curate.addedImages,
-  galleryCreated: state.curate.isSubmitted,
+  // galleryCreated: state.curate.isSubmitted,
   user: state.auth.currentUser
 });
 

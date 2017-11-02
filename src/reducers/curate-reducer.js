@@ -37,7 +37,7 @@ export default function(state = initialState, action) {
     tags.splice(action.payload, 1)
     return Object.assign({}, state, { tags: tags })
   } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
-    return Object.assign({}, state, { isSubmitted: true })
+    return Object.assign({}, state, initialState)
     // TODO: Go to Dashboard
   }
 
