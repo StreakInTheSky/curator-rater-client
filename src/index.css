@@ -27,7 +27,7 @@ h2{ font-size: 1.5em }
 h3{ font-size: 1.25em }
 
 a {
-  color: var(--light-grey);
+  color: var(--text-color);
 }
 
 a:hover {
@@ -87,6 +87,16 @@ button:disabled, button[disabled]:hover {
   padding: 5px;
   background-color: white;
   cursor: pointer;
+}
+
+.form-error {
+  color: red;
+  font-size: 0.8em;
+}
+
+.form-warning {
+  color: yellow;
+  font-size: 0.8em;
 }
 
 @media only screen and (max-width: 500px) {

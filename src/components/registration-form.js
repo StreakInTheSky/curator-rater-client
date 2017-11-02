@@ -3,7 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {createUser} from '../actions/profile';
 import {loginUser} from '../actions/auth';
 import Input from './input';
-import {required, nonEmpty, email, length, isTrimmed} from '../validators';
+import {required, nonEmpty, email, length, isTrimmed, noCaps} from '../validators';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
@@ -26,7 +26,7 @@ export class RegistrationForm extends React.Component {
           component={Input}
           type="text"
           name="username"
-          validate={[required, nonEmpty, isTrimmed]}
+          validate={[required, nonEmpty, length({min: 1, max: 12}), isTrimmed, noCaps]}
         />
         <label htmlFor="email">Email</label>
         <Field
