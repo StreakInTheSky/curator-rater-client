@@ -1,6 +1,7 @@
 import {
   FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_ERROR
+  FETCH_USER_INFO_ERROR,
+  FOLLOW_USER_ERROR
 } from '../actions/profile'
 
 const initialState = {
@@ -16,6 +17,8 @@ export default function(state = initialState, action) {
   if (action.type === FETCH_USER_INFO_SUCCESS) {
     state = Object.assign({}, state, action.payload)
   } else if (action.type === FETCH_USER_INFO_ERROR) {
+    console.error(action.payload)
+  } else if (action.type === FOLLOW_USER_ERROR) {
     console.error(action.payload)
   }
 

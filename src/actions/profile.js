@@ -2,6 +2,7 @@ import axios from 'axios';
 import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config.js';
+import {refreshAuthToken} from './auth'
 
 export const FETCH_USER_INFO_SUCCESS = 'FETCH_USER_INFO_SUCCESS';
 export const fetchUserInfoSuccess = (data) => ({
@@ -17,6 +18,13 @@ export const fetchUserInfoError = (error) => ({
 
 export const fetchUserInfo = (username) => dispatch => {
   const url = `${API_BASE_URL}/user/${username}`;
+  axios.get(url)
+    .then(({data}) => dispatch(fetchUserInfoSuccess(data)))
+    .catch(error => dispatch(fetchUserInfoError(error)))
+}
+
+export const fetchUserById = (userId) => dispatch => {
+  const url = `${API_BASE_URL}/user/id/${userId}`;
   axios.get(url)
     .then(({data}) => dispatch(fetchUserInfoSuccess(data)))
     .catch(error => dispatch(fetchUserInfoError(error)))
@@ -49,4 +57,26 @@ export const createUser = (data) => dispatch => {
           })
         );
     })
+}
+
+export const FOLLOW_USER_ERROR= 'FOLLOW_USER_ERROR';
+export const followUserError = (error) => ({
+    type: FOLLOW_USER_ERROR,
+    payload: error
+});
+
+export const followUser = (followingId, myId) => dispatch => {
+  const url = `${API_BASE_URL}/user/follow`
+  axios.post(url, { followingId, followerId: myId})
+    .then(() => dispatch(refreshAuthToken))
+    .then(res => dispatch(fetchUserById(followingId)))
+    .catch(err => dispatch(followUserError(err)))
+}
+
+export const unfollowUser = (followingId, myId) => dispatch => {
+  const url = `${API_BASE_URL}/user/unfollow`
+  axios.post(url, { followingId, followerId: myId})
+    .then(() => dispatch(refreshAuthToken))
+    .then(res => dispatch(fetchUserById(followingId)))
+    .catch(err => dispatch(followUserError(err)))
 }
