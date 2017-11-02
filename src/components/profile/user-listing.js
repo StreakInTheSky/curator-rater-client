@@ -9,13 +9,7 @@ export default function UserListing(props) {
   return (
       <li>
         <Link to={`/${props.username}`} >{props.username}</Link>
-        <button className="follow-button" style={styles.button} onClick={followUser}>follow</button>
+        <button className="follow-button" onClick={followUser}>follow</button>
       </li>
   )
-}
-
-const styles = {
-  button: {
-    float: 'right'
-  }
 }
