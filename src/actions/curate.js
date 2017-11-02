@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { SubmissionError } from 'redux-form';
 import AWS from 'aws-sdk';
+import {AWS_ACCESS_KEY} from '../config.js'
 import {API_BASE_URL} from '../config.js'
 
 export const FETCH_IMAGE_SUCCESS = 'FETCH_IMAGE_SUCCESS';
@@ -69,8 +70,8 @@ export const submitGallerySuccess = (data) => ({
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   region: 'us-west-1',
-  accessKeyId: 'AKIAJUROSBMKQBFZSB2A',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAIF7YBPEHA6FECMMA',
+  secretAccessKey: AWS_ACCESS_KEY,
   params: { Bucket: 'curator-rater-images' }
 })
 
@@ -103,6 +104,7 @@ export const submitGallery = galleryData => dispatch => {
   const {title, description, images, user} = galleryData
   const galleryDetails = { title, description, user }
   let gallery
+  console.log(AWS_ACCESS_KEY)
 
   return axios
     .post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
