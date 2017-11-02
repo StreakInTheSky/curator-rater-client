@@ -65,8 +65,6 @@ export const submitGallerySuccess = (data) => ({
     payload: data
 });
 
-// TODO: Get more secure way to get credentials
-
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   region: 'us-west-1',
