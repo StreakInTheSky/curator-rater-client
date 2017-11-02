@@ -1,16 +1,20 @@
 
 /* Global Styles */
 :root {
-  --text-color: #000;
-  --light-grey: #AAA;
+  --header-color: #000;
+  --text-color: #777;
+  --light-grey: #CCC;
   --dark-grey: #444;
   --high-light-color: #5bc7a0;
 }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  /*font-size: 1em;
-  line-height: 1.375em;*/
+  color: var(--text-color)
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--header-color);
 }
 
 .container {
@@ -23,44 +27,43 @@ h2{ font-size: 1.5em }
 h3{ font-size: 1.25em }
 
 a {
-  color: #AAA;
+  color: var(--light-grey);
 }
 
 a:hover {
-  color: #DDD;
   background-color: #444;
 }
 
 button, .mock-button {
   padding: 5px;
   background-color: white;
-  border: 1px solid grey;
+  border: 1px solid var(--text-color);
   font-size: .8em;
-  color: grey;
+  color: var(--text-color);
   text-decoration: none;
 }
 
 .mock-button-disabled {
   padding: 5px;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--light-grey);
   background-color: white;
-  color: lightgrey;
+  color: var(--light-grey);
   font-size: .8em;
   text-decoration: none;
   pointer-events: none;
 }
 
 button:hover, .mock-button:hover {
-  background-color: grey;
+  background-color: var(--text-color);
   color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
 button:disabled, button[disabled]:hover {
-  border: 1px solid lightgrey;
+  border: 1px solid var(--light-grey);
   background-color: white;
-  color: lightgrey;
+  color: var(--light-grey);
 }
 
 .hidden {
@@ -84,18 +87,6 @@ button:disabled, button[disabled]:hover {
   padding: 5px;
   background-color: white;
   cursor: pointer;
-}
-
-.thumbnail-container {
-  width: 15%;
-  padding-bottom: 14.5%;
-  box-sizing: border-box;
-  border: 2px solid lightgrey;
-  background-color: white;
-}
-
-.thumbnail-container.selected {
-  border: 2px solid #5bc7a0;
 }
 
 @media only screen and (max-width: 500px) {

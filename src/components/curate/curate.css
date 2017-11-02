@@ -3,7 +3,16 @@
   position: relative;
   min-width: 100px;
   min-height: 100px;
+  width: 15%;
   margin: 0 3px;
+  padding-bottom: 14.5%;
+  box-sizing: border-box;
+  border: 2px solid var(--light-grey);
+  background-color: white;
+}
+
+.thumbnail-container.selected {
+  border: 2px solid #5bc7a0;
 }
 
 .image-delete {
