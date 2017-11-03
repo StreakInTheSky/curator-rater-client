@@ -29,14 +29,15 @@ export class UserProfile extends React.Component {
   }
 
   render() {
-    const profile = this.props.profile;
-
-    const galleries = profile.galleries.map((gallery, index) => {
-      return <Gallery key={index} gallery={gallery} />;
-    });
     if (!this.props.user) {
       return <div>Loading page...</div>
     } else {
+      const profile = this.props.profile;
+
+      const galleries = profile.galleries.map((gallery, index) => {
+        return <Gallery key={index} gallery={gallery} ownProfile={profile.id === this.props.user.id ? true : null} />;
+      });
+      
       const followingIds = this.props.user.following.map(user => user._id)
 
       const followButton = followingIds.indexOf(profile.id) >= 0

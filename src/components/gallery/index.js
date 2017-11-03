@@ -21,13 +21,15 @@ export default class Gallery extends React.Component {
   }
 
   render() {
+    console.log(this.props.ownProfile)
     const {title, description, username, images} = this.props.gallery
+    const favoriteStar = this.props.ownProfile ? null : <span className="favorite-star">&#9734;</span>;
 
     return (
       <div className="gallery">
         <div className="gallery-info">
           <h3 className="gallery-name">{title}</h3>
-          <span className="favorite-star">&#9734;</span>
+          {favoriteStar}
           <p className="gallery-user">{username}</p>
           <p className="gallery-description">{description}</p>
           {/* <Hashtags tags={tags} /> */}
