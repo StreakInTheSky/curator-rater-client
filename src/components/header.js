@@ -23,7 +23,7 @@ export class Header extends React.Component{
     let accountMenu;
     let addGalleryLink;
 
-    if (this.props.loggedIn) {
+    if (this.props.user) {
       accountMenu = <AccountMenu logOut={() => this.logOut()} />
       addGalleryLink = <Link className="create-link" to="/curate">Create Gallery</Link>
     } else if (this.props.location.pathname === '/login') {
@@ -47,7 +47,7 @@ export class Header extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    user: state.auth.currentUser
 });
 
 export default withRouter(connect(mapStateToProps)(Header));

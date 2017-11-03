@@ -16,6 +16,20 @@ export const setCurrentUser = (user) => ({
   user
 })
 
+export const FETCH_CURRENT_USER_ERROR = 'FETCH_CURRENT_USER_ERROR';
+export const fetchCurrentUserError = error => ({
+  type: FETCH_CURRENT_USER_ERROR,
+  error
+})
+
+export const fetchUserById = (userId) => dispatch => {
+  const url = `${API_BASE_URL}/user/id/${userId}`;
+  axios.get(url)
+    // .then(({data}) => console.log(data))
+    .then(({data}) => dispatch(setCurrentUser(data)))
+    .catch(error => dispatch(fetchCurrentUserError(error)))
+}
+
 export const loginUser = (data) => dispatch => {
   const credentials = {
     username: data.email,
@@ -33,7 +47,7 @@ export const loginUser = (data) => dispatch => {
         user: decodedToken.user
       }
       dispatch(setAuthToken(data.authToken))
-      dispatch(setCurrentUser(data.user))
+      dispatch(fetchUserById(data.user.id))
       saveAuthToken(data.authToken)
       return data.user
     })
@@ -67,7 +81,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         user: decodedToken.user
       }
       dispatch(setAuthToken(data.authToken))
-      dispatch(setCurrentUser(data.user))
+      dispatch(fetchUserById(data.user.id))
       saveAuthToken(data.authToken)
       return Promise.resolve()
     })

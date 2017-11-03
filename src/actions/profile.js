@@ -2,7 +2,8 @@ import axios from 'axios';
 import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config.js';
-import {refreshAuthToken} from './auth'
+import {setCurrentUser} from './auth'
+
 
 export const FETCH_USER_INFO_SUCCESS = 'FETCH_USER_INFO_SUCCESS';
 export const fetchUserInfoSuccess = (data) => ({
@@ -68,15 +69,16 @@ export const followUserError = (error) => ({
 export const followUser = (followingId, myId) => dispatch => {
   const url = `${API_BASE_URL}/user/follow`
   axios.post(url, { followingId, followerId: myId})
-    .then(() => dispatch(refreshAuthToken))
-    .then(res => dispatch(fetchUserById(followingId)))
+    .then(res => {
+      dispatch(setCurrentUser(res.data))
+      dispatch(fetchUserById(followingId))
+    })
     .catch(err => dispatch(followUserError(err)))
 }
 
 export const unfollowUser = (followingId, myId) => dispatch => {
   const url = `${API_BASE_URL}/user/unfollow`
   axios.post(url, { followingId, followerId: myId})
-    .then(() => dispatch(refreshAuthToken))
     .then(res => dispatch(fetchUserById(followingId)))
     .catch(err => dispatch(followUserError(err)))
 }
