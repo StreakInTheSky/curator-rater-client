@@ -32,6 +32,7 @@ a {
 
 a:hover {
   background-color: #444;
+  color: var(--light-grey);
 }
 
 button, .mock-button {
