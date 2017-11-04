@@ -21,7 +21,6 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    console.log(this.props.ownProfile)
     const {title, description, username, images} = this.props.gallery
     const favoriteStar = this.props.ownProfile ? null : <span className="favorite-star">&#9734;</span>;
 
