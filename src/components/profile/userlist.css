@@ -1,44 +1,10 @@
-
-.modal-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center
-}
-
-.screen-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.7)
-}
-
 .modal-box {
   margin: auto;
-  position: relative;
+  position: absolute;
   width: 500px;
   height: 500px;
   background-color: white;
   z-index: 2;
-}
-
-.close-button {
-  position: absolute;
-  top: -2em;
-  right: 0;
-  padding: 3px;
-  background-color: "white";
-  cursor: pointer
 }
 
 .list-title {
@@ -55,5 +21,27 @@
 }
 
 .follow-button {
+  padding: 5px;
+  font-size: .8em;
+  font-weight: normal;
+}
+
+.follow-button, .unfollow-button {
   float: right;
+}
+
+@media only screen and (max-width: 500px) {
+    .modal-box {
+      width: 100%;
+      height: 100%;
+    }
+
+    button, .mock-button{
+      font-size: 1em;
+      padding: 5px;
+      background-color: white;
+      border: 1px solid black;
+      color: var(--dark-grey);
+      text-decoration: none;
+    }
 }
