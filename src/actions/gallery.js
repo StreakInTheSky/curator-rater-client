@@ -20,16 +20,29 @@ export const addFavoriteGalleryError = (error) => ({
     error
 });
 
+export const REMOVE_FAVORITE_GALLERY_ERROR= 'REMOVE_FAVORITE_GALLERY_ERROR';
+export const removeFavoriteGalleryError = (error) => ({
+    type: REMOVE_FAVORITE_GALLERY_ERROR,
+    error
+});
+
 export const fetchGalleryInfo = (galleryId) => dispatch => {
   const url = `${API_BASE_URL}/gallery/${galleryId}`;
   axios.get(url)
     .then(({data}) => dispatch(fetchGalleryInfoSuccess(data)))
-    .catch(error => dispatch(fetchGalleryInfoError(error)))
+    .catch(err => dispatch(fetchGalleryInfoError(err)))
 }
 
 export const addFavoriteGallery = (galleryId, userId) => dispatch => {
   const url = `${API_BASE_URL}/gallery/favorite`;
   axios.post(url, { galleryId, userId })
     .then(res => dispatch(setCurrentUser(res.data.updatedUser)))
-    .catch(err => console.error(err.response))
+    .catch(err => dispatch(fetchGalleryInfoError(err)))
+}
+
+export const removeFavoriteGallery = (galleryId, userId) => dispatch => {
+  const url = `${API_BASE_URL}/gallery/unfavorite`;
+  axios.post(url, { galleryId, userId })
+    .then(res => dispatch(setCurrentUser(res.data.updatedUser)))
+    .catch(err => dispatch(fetchGalleryInfoError(err)))
 }

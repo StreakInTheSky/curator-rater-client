@@ -11,8 +11,7 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0],
-      favorited: false
+      currentImage: this.props.gallery.images[0]
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -27,7 +26,7 @@ export class Gallery extends React.Component {
   }
 
   removeFavorite() {
-    this.setState({favorited: false})
+    this.props.dispatch(actions.removeFavoriteGallery(this.props.gallery._id, this.props.user.id))
   }
 
   render() {
