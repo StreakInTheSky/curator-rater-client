@@ -33,9 +33,6 @@ export class Gallery extends React.Component {
     const {title, description, username, images, _id } = this.props.gallery
     const id = _id;
 
-    console.log('gallery id: ', id)
-    console.log('index of gallery in user favorites', this.props.user.favorites.indexOf(id))
-
     const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
     ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
     : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
