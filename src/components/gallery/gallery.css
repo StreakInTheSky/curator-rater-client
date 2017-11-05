@@ -8,16 +8,6 @@
   flex-wrap: wrap;
 }
 
-.gallery:after {
-  content:"";
-  background: linear-gradient(to right, rgba(var(--light-grey),0), rgba(var(--light-grey),1), rgba(var(--light-grey),1));
-  display: block;
-  height: 4px;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-}
-
 .gallery-info {
   width: 200px;
   max-width: 300px;
@@ -36,7 +26,6 @@
 }
 
 .favorite-star:hover, .favorited {
-  /*content: '&#9733;';*/
   color: #5bc7a0;
 }
 
@@ -139,4 +128,14 @@
     width: 100%;
     height: 100%;
   }
+
+  .gallery-thumbnails {
+    width: 100vw;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  /*.thumbnail-container {
+    display:
+  }*/
 }
