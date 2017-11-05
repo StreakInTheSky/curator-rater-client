@@ -40,7 +40,13 @@ export class UserProfile extends React.Component {
       const profile = this.props.profile;
 
       const galleries = profile.galleries.map((gallery, index) => {
-        return <Gallery key={index} gallery={gallery} ownProfile={profile.id === this.props.user.id ? true : null} />;
+        return <Gallery
+          key={index}
+          gallery={gallery}
+          ownGallery={profile.id === this.props.user.id ? true : null}
+          currentFavorites={this.props.user.favorites}
+          currentUser={this.props.user.id}
+        />;
       });
 
       const followingIds = this.props.user.following.map(user => user._id)

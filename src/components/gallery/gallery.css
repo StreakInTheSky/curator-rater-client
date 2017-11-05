@@ -35,8 +35,8 @@
   font-size: 1.25em;
 }
 
-.favorite-star:hover {
-  content: '&#9733;';
+.favorite-star:hover, .favorited {
+  /*content: '&#9733;';*/
   color: #5bc7a0;
 }
 

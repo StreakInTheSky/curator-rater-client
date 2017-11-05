@@ -1,16 +1,18 @@
 import React from 'react';
-
+import {connect} from 'react-redux'
+import * as actions from '../../actions/gallery'
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
 
 import './gallery.css'
 
-export default class Gallery extends React.Component {
+export class Gallery extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0]
+      currentImage: this.props.gallery.images[0],
+      favorited: false
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -20,9 +22,26 @@ export default class Gallery extends React.Component {
     this.setState({currentImage: this.props.gallery.images[imgIndex]})
   }
 
+  addFavorite() {
+    this.props.dispatch(actions.addFavoriteGallery(this.props.gallery._id, this.props.user.id))
+  }
+
+  removeFavorite() {
+    this.setState({favorited: false})
+  }
+
   render() {
-    const {title, description, username, images} = this.props.gallery
-    const favoriteStar = this.props.ownProfile ? null : <span className="favorite-star">&#9734;</span>;
+    const {title, description, username, images, _id } = this.props.gallery
+    const id = _id;
+
+    console.log('gallery id: ', id)
+    console.log('index of gallery in user favorites', this.props.user.favorites.indexOf(id))
+
+    const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
+    ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
+    : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
+
+    const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
     return (
       <div className="gallery">
@@ -41,3 +60,9 @@ export default class Gallery extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.auth.currentUser
+})
+
+export default connect(mapStateToProps)(Gallery)
