@@ -7,10 +7,18 @@ import ProfileMenu from './profile-menu'
 import Gallery from '../gallery'
 import UserList from './userlist'
 import FollowButton from './follow-button'
+import UserFavorites from './favorites'
 
 import './profile.css'
 
 export class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite: false
+    };
+  }
+
   componentWillMount() {
     this.props.dispatch(actions.fetchUserInfo(this.props.match.params.username));
   }
@@ -33,6 +41,12 @@ export class UserProfile extends React.Component {
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
   }
 
+  toggleFavorites(e) {
+    e.preventDefault()
+    console.log(this.state.favorites)
+    this.setState({ favorites: !this.state.favorites })
+  }
+
   render() {
     if (!this.props.user) {
       return <div>Loading page...</div>
@@ -50,28 +64,33 @@ export class UserProfile extends React.Component {
       });
 
       const followingIds = this.props.user.following.map(user => user._id)
+      const profileLink = <span><a onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
 
       return (
         <main className="content">
-          <Route path="/:username/:userlist" component={UserList} follow={this.followUser} unfollow={this.unfollowUser} />
+          <Route exact path="/:username/list/:userlist" component={UserList} follow={this.followUser} unfollow={this.unfollowUser} />
           <section className="profile-header">
             <div className="user-info">
               <h2 className="username">
-                {profile.id === this.props.user.id ? 'My Profile' : profile.username}
+                {this.state.favorites
+                  ? profileLink
+                  : profile.id === this.props.user.id ? 'My Profile' : profile.username
+                }
               </h2>
               {profile.id === this.props.user.id ? null : <FollowButton
-                                                            following={followingIds.indexOf(profile.id) >= 0}
-                                                            userId={profile.id}
-                                                            follow={userId => this.followUser(userId)}
-                                                            unfollow={userId => this.unfollowUser(userId)}/>}
+                following={followingIds.indexOf(profile.id) >= 0}
+                userId={profile.id}
+                follow={userId => this.followUser(userId)}
+                unfollow={userId => this.unfollowUser(userId)}/>}
             </div>
             <ProfileMenu
               username={profile.username}
               following={profile.following}
               followers={profile.followers}
+              toggleFavorites={(e)=>this.toggleFavorites(e)}
             />
           </section>
-          {galleries}
+          {this.state.favorites ? <UserFavorites /> : galleries}
         </main>
       )
     }
