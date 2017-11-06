@@ -8,12 +8,19 @@ import * as actions from '../../actions/profile'
 import './userlist.css'
 
 export class UserList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      followed: false
+    }
+  }
 
   back() {
     this.props.history.goBack()
   }
 
   follow(userId) {
+    this.setState({ followed: true })
     this.props.dispatch(actions.followUser(userId, this.props.user.id))
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.match.params.username)))
   }
@@ -33,6 +40,7 @@ export class UserList extends React.Component {
                  username={user.username}
                  userId={user._id}
                  key={index}
+                 followed={this.state.followed}
                  following={following}
                  follow={(userId)=>this.follow(userId)}
                  unfollow={(userId)=>this.unfollow(userId)}

@@ -15,7 +15,8 @@ export class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorite: false
+      favorites: false,
+      followed: false,
     };
   }
 
@@ -31,6 +32,7 @@ export class UserProfile extends React.Component {
   }
 
   followUser(userId) {
+    this.setState({ followed: true })
     this.props.dispatch(actions.followUser(userId, this.props.user.id))
       .then(()=>console.log('followed:', this.props.profile.username))
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
@@ -79,7 +81,7 @@ export class UserProfile extends React.Component {
                 }
               </h2>
               {profile.id === this.props.user.id ? null : <FollowButton
-                following={followingIds.indexOf(profile.id) >= 0}
+                following={followingIds.indexOf(profile.id) >= 0 || this.state.followed}
                 userId={profile.id}
                 follow={userId => this.followUser(userId)}
                 unfollow={userId => this.unfollowUser(userId)}/>}

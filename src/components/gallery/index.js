@@ -13,7 +13,8 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0]
+      currentImage: this.props.gallery.images[0],
+      favorited: false,
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -24,27 +25,41 @@ export class Gallery extends React.Component {
     this.setState({currentImage: this.props.gallery.images[imgIndex]})
   }
 
-  addFavorite() {
-    this.props.dispatch(actions.addFavoriteGallery(this.props.gallery._id, this.props.user.id))
+  addFavorite(galleryId) {
+    this.setState({ favorited: true })
+    this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.user.id))
   }
 
-  removeFavorite() {
-    this.props.dispatch(actions.removeFavoriteGallery(this.props.gallery._id, this.props.user.id))
+  removeFavorite(galleryId) {
+    this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.user.id))
   }
 
   vote(imageId) {
-    this.props.dispatch(voteImage(imageId, this.props.user.id))
+    const userImageIds = [];
+    this.props.user.galleries.forEach((gallery) => {
+      gallery.images.forEach(image => {
+        userImageIds.push(image._id)
+      })
+    })
+
+    if (userImageIds.indexOf(imageId) >= 0) {
+      alert("Can't vote for your own image")
+    } else {
+      this.props.dispatch(voteImage(imageId, this.props.user.id))
+    }
   }
 
   render() {
     if (!this.props.user) {
       return <p>Loading gallery...</p>
     } else {
-      const {title, description, user, images, _id } = this.props.gallery
-      const id = _id;
-      const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
-      ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
-      : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
+      const {title, description, user, images, _id, id} = this.props.gallery
+      const favoriteIds = this.props.currentFavorites.map(gallery => gallery._id)
+      const galleryId = id ? id : _id
+
+      const checkFavorited = favoriteIds.indexOf(galleryId) >= 0 || this.state.favorited
+      ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite(galleryId)}>&#9733;</span>
+      : <span className="favorite-star" onClick={()=>this.addFavorite(galleryId)}>&#9734;</span>
 
       const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
