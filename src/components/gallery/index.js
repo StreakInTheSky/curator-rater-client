@@ -12,10 +12,12 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0]
+      currentImage: this.props.gallery.images[0],
+      upvoted: []
     }
 
     this.viewImage = this.viewImage.bind(this)
+    this.vote = this.vote.bind(this)
   }
 
   viewImage(imgIndex) {
@@ -30,10 +32,14 @@ export class Gallery extends React.Component {
     this.props.dispatch(actions.removeFavoriteGallery(this.props.gallery._id, this.props.user.id))
   }
 
+  vote(imageId) {
+    const prevState = this.state.upvoted
+    this.setState({ upvoted: [...prevState, imageId] })
+  }
+
   render() {
     const {title, description, user, images, _id } = this.props.gallery
     const id = _id;
-    console.log(this.props.user)
     const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
     ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
     : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
@@ -53,8 +59,8 @@ export class Gallery extends React.Component {
           {/* <Hashtags tags={tags} /> */}
         </div>
         <div className="gallery-images">
-          <ImageViewer image={this.state.currentImage}/>
-          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
+          <ImageViewer image={this.state.currentImage} vote={this.vote}/>
+          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.state.upvoted}/>
         </div>
       </div>
     )

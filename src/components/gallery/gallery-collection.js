@@ -3,7 +3,6 @@ import React from 'react';
 import Thumbnail from './gallery-thumbnail'
 
 export default function(props) {
-  console.log(props.userVotes)
   const images = props.images.map((image, index) => {
     return <Thumbnail
             src={image.path}
