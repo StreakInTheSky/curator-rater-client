@@ -25,6 +25,7 @@ export class UserProfile extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname){
+      this.setState({ favorites: false })
       this.props.dispatch(actions.fetchUserInfo(nextProps.match.params.username));
     }
   }
@@ -43,7 +44,6 @@ export class UserProfile extends React.Component {
 
   toggleFavorites(e) {
     e.preventDefault()
-    console.log(this.state.favorites)
     this.setState({ favorites: !this.state.favorites })
   }
 
@@ -58,6 +58,7 @@ export class UserProfile extends React.Component {
           key={index}
           gallery={gallery}
           ownGallery={profile.id === this.props.user.id ? true : null}
+          profileGallery={profile.username === gallery.user.username ? true : null}
           currentFavorites={this.props.user.favorites}
           currentUser={this.props.user.id}
         />;

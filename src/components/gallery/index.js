@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as actions from '../../actions/gallery'
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
@@ -30,21 +31,24 @@ export class Gallery extends React.Component {
   }
 
   render() {
-    const {title, description, username, images, _id } = this.props.gallery
+    const {title, description, user, images, _id } = this.props.gallery
     const id = _id;
-
+    // console.log(this.props.gallery)
     const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
     ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
     : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
 
     const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
+    const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>{user.username}</Link></p>
+    const displayUsername = this.props.profileGallery ? null : galleryUsername
+
     return (
       <div className="gallery">
         <div className="gallery-info">
           <h3 className="gallery-name">{title}</h3>
           {favoriteStar}
-          <p className="gallery-user">{username}</p>
+          {displayUsername}
           <p className="gallery-description">{description}</p>
           {/* <Hashtags tags={tags} /> */}
         </div>
