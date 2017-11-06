@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '../../actions/gallery'
+import { voteImage } from '../../actions/image'
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
 
@@ -12,8 +13,7 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0],
-      upvoted: []
+      currentImage: this.props.gallery.images[0]
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -33,8 +33,7 @@ export class Gallery extends React.Component {
   }
 
   vote(imageId) {
-    const prevState = this.state.upvoted
-    this.setState({ upvoted: [...prevState, imageId] })
+    this.props.dispatch(voteImage(imageId, this.props.user.id))
   }
 
   render() {
@@ -60,7 +59,7 @@ export class Gallery extends React.Component {
         </div>
         <div className="gallery-images">
           <ImageViewer image={this.state.currentImage} vote={this.vote}/>
-          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.state.upvoted}/>
+          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
         </div>
       </div>
     )
