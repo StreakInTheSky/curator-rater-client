@@ -33,7 +33,7 @@ export class Gallery extends React.Component {
   render() {
     const {title, description, user, images, _id } = this.props.gallery
     const id = _id;
-    // console.log(this.props.gallery)
+    console.log(this.props.user)
     const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
     ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
     : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
@@ -54,7 +54,7 @@ export class Gallery extends React.Component {
         </div>
         <div className="gallery-images">
           <ImageViewer image={this.state.currentImage}/>
-          <GalleryCollection images={images} viewImage={this.viewImage}/>
+          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
         </div>
       </div>
     )
