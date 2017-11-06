@@ -37,32 +37,36 @@ export class Gallery extends React.Component {
   }
 
   render() {
-    const {title, description, user, images, _id } = this.props.gallery
-    const id = _id;
-    const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
-    ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
-    : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
+    if (!this.props.user) {
+      return <p>Loading gallery...</p>
+    } else {
+      const {title, description, user, images, _id } = this.props.gallery
+      const id = _id;
+      const checkFavorited = this.props.user.favorites.indexOf(id) >= 0
+      ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite()}>&#9733;</span>
+      : <span className="favorite-star" onClick={()=>this.addFavorite()}>&#9734;</span>
 
-    const favoriteStar = this.props.ownGallery ? null : checkFavorited;
+      const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
-    const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>{user.username}</Link></p>
-    const displayUsername = this.props.profileGallery ? null : galleryUsername
+      const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>{user.username}</Link></p>
+      const displayUsername = this.props.profileGallery ? null : galleryUsername
 
-    return (
-      <div className="gallery">
-        <div className="gallery-info">
-          <h3 className="gallery-name">{title}</h3>
-          {favoriteStar}
-          {displayUsername}
-          <p className="gallery-description">{description}</p>
-          {/* <Hashtags tags={tags} /> */}
+      return (
+        <div className="gallery">
+          <div className="gallery-info">
+            <h3 className="gallery-name">{title}</h3>
+            {favoriteStar}
+            {displayUsername}
+            <p className="gallery-description">{description}</p>
+            {/* <Hashtags tags={tags} /> */}
+          </div>
+          <div className="gallery-images">
+            <ImageViewer image={this.state.currentImage} vote={this.vote}/>
+            <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
+          </div>
         </div>
-        <div className="gallery-images">
-          <ImageViewer image={this.state.currentImage} vote={this.vote}/>
-          <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
