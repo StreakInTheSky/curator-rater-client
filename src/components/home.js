@@ -28,7 +28,7 @@ export class Home extends React.Component {
 
       return (
         <div>
-          <p>Curate new galleries or rate some galleries by double clicking on your favorite images.</p>
+          <p className="page-description">Curate new galleries or rate some galleries by double clicking on your favorite images.</p>
           <main>
             {galleries}
           </main>

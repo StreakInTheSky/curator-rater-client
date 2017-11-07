@@ -11,7 +11,7 @@ export function LoginPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <main className="main-content">
+        <main className="main-content auth-form">
             <h2>Login!</h2>
             <LoginForm />
             <div>

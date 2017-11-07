@@ -11,7 +11,7 @@ export function RegistrationPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <main className="main-content">
+        <main className="main-content auth-form">
             <h2>Sign Up!</h2>
             <RegistrationForm />
             <div>

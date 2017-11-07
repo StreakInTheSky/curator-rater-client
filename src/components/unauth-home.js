@@ -20,7 +20,7 @@ export class UnauthHome extends React.Component {
 
     return (
       <div>
-        <p>Login or sign up and start curating new galleries or rating them.</p>
+        <p className="page-description">Whether you're a photographer, designer, tastemaker, or just want to share your ideas. Curator-rater is there to help you find your voice an audience. Login or sign up and start curating new galleries or rating them.</p>
         <main>
           {galleries}
         </main>

@@ -125,6 +125,15 @@ button:disabled, button[disabled]:hover {
       color: var(--dark-grey);
       text-decoration: none;
     }
+
+    .page-description {
+      padding: 0 10px;
+    }
+
+    .auth-form {
+      width: 90vw;
+      margin: auto;
+    }
 }
 
 /* Curate Page */
