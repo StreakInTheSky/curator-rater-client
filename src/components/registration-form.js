@@ -26,7 +26,7 @@ export class RegistrationForm extends React.Component {
           component={Input}
           type="text"
           name="username"
-          validate={[required, nonEmpty, length({min: 1, max: 12}), isTrimmed, noCaps]}
+          validate={[required, nonEmpty, length({min: 1, max: 18}), isTrimmed, noCaps]}
         />
         <label htmlFor="email">Email</label>
         <Field
