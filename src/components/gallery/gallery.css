@@ -139,16 +139,24 @@
     padding: 10px;
   }
 
+  .gallery-image-viewer {
+    width: 100vw;
+    margin-bottom: 20px;
+    border-top: 3px solid var(--light-grey);
+    border-bottom: 3px solid var(--light-grey);
+  }
+
   .viewed-image-container {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 100vw;
   }
 
   .viewed-image {
     border: none;
-    border-top: 3px solid var(--light-grey);
-    border-bottom: 3px solid var(--light-grey);
-    padding: 20px 0;
+    margin: 0;
+    padding: 0;
   }
 
   .gallery-thumbnails {
