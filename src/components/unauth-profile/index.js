@@ -8,8 +8,6 @@ import Gallery from '../unauth-gallery'
 import UserList from './userlist'
 import UserFavorites from './favorites'
 
-import './profile.css'
-
 export class UnauthProfile extends React.Component {
   constructor(props) {
     super(props);

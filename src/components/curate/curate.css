@@ -1,16 +1,3 @@
-.thumbnail-container {
-  display: inline-block;
-  position: relative;
-  min-width: 100px;
-  min-height: 100px;
-  width: 15%;
-  margin: 0 3px;
-  padding-bottom: 14.5%;
-  box-sizing: border-box;
-  border: 2px solid var(--light-grey);
-  background-color: white;
-}
-
 .thumbnail-container.selected {
   border: 2px solid #5bc7a0;
 }
@@ -18,21 +5,14 @@
 .image-delete {
   display: inline-block;
   position: absolute;
-  top: -9px;
-  right: -6px;
+  top: -2px;
+  right: 0;
   z-index: 3;
   cursor:default;
 }
 
 .image-delete:hover {
   color: var(--high-light-color);
-}
-
-.thumbnail {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%)
 }
 
 .form-section {

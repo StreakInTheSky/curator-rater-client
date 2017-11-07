@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
 
-import './gallery.css'
-
 export class Gallery extends React.Component {
   constructor(props) {
     super(props)

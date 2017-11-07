@@ -71,16 +71,19 @@
 
 .gallery-thumbnails {
   min-width: 200px;
+  max-width: 500px;
 }
 
 .thumbnail-container {
+  display: inline-block;
   position: relative;
-  width: 75px;
-  height: 75px;
-  padding-bottom: 14.5%;
+  width: 100px;
+  height: 100px;
+  margin: 0 3px;
   box-sizing: border-box;
   border: 2px solid var(--light-grey);
   background-color: white;
+  overflow: hidden;
 }
 
 .thumbnail {
@@ -89,7 +92,6 @@
   top: 50%;
   transform: translateY(-50%)
 }
-
 
 /* Gallery Modal */
 
@@ -148,7 +150,4 @@
     white-space: nowrap;
   }
 
-  /*.thumbnail-container {
-    display:
-  }*/
 }

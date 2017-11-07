@@ -4,8 +4,6 @@ import {Redirect} from 'react-router-dom'
 
 import UserListing from './user-listing'
 
-import './userlist.css'
-
 export class UserList extends React.Component {
   back() {
     this.props.history.goBack()
