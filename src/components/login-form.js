@@ -33,7 +33,7 @@ export class LoginForm extends React.Component {
               />
               <button
                 type="submit"
-                disabled={this.props.pristine || this.props.submitting}>
+                disabled={this.props.submitting}>
                 Login
               </button>
             </form>
@@ -43,5 +43,9 @@ export class LoginForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'login'
+  form: 'login',
+  initialValues: {
+    email: 'demo@email.com',
+    password: 'password'
+  }
 })(LoginForm);
