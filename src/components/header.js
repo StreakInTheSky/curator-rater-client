@@ -11,6 +11,7 @@ import AccountMenu from './account-menu'
 
 export class Header extends React.Component{
   logOut() {
+    this.props.history.push("/");
     this.props.dispatch(setCurrentUser(null));
     this.props.dispatch(setAuthToken(null));
     clearAuthToken();
