@@ -13,10 +13,19 @@ import './curate.css';
 export class CurateContainer extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loggedIn: true
+    }
 
     this.deleteImage = this.deleteImage.bind(this)
     this.viewImage = this.viewImage.bind(this)
     this.unviewImage = this.unviewImage.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.user) {
+      this.setState({ loggedIn: false })
+    }
   }
 
   deleteImage(imageIndex) {
@@ -31,6 +40,9 @@ export class CurateContainer extends React.Component {
     this.props.dispatch(actions.unviewImage(imageIndex));
   }
   render() {
+    if (!this.state.loggedIn) {
+      return <Redirect to="/" />
+    }
     return (
       <main className="curate-main-container">
         <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} />
@@ -61,7 +73,8 @@ export class CurateContainer extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   addedImages: state.curate.addedImages,
-  currentImage: state.curate.currentImage
+  currentImage: state.curate.currentImage,
+  user: state.auth.currentUser
 });
 
 export default connect(mapStateToProps)(CurateContainer);
