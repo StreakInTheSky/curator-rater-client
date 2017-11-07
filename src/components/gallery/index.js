@@ -63,7 +63,7 @@ export class Gallery extends React.Component {
 
       const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
-      const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>{user.username}</Link></p>
+      const galleryUsername = <p className="gallery-user"><h4><Link to={`/${user.username}`}>{user.username}</Link></h4></p>
       const displayUsername = this.props.profileGallery ? null : galleryUsername
 
       return (
