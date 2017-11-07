@@ -1,3 +1,8 @@
+.curate-main-container {
+  width: 90vw;
+  margin: auto;
+}
+
 .thumbnail-container.selected {
   border: 2px solid #5bc7a0;
 }
@@ -17,4 +22,11 @@
 
 .form-section {
   width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .curate-main-container {
+    width: 90vw;
+    margin: auto;
+  }
 }

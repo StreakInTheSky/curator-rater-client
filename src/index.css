@@ -126,6 +126,12 @@ button:disabled, button[disabled]:hover {
       text-decoration: none;
     }
 
+    .mock-button-disabled {
+      font-size: 1em;
+      padding: 5px;
+      text-decoration: none;
+    }
+
     .page-description {
       padding: 0 10px;
     }
