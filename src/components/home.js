@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Gallery from './gallery'
+import UnauthHome from './unauth-home'
 import * as actions from '../actions/gallery'
 
 export class Home extends React.Component {
@@ -9,8 +10,10 @@ export class Home extends React.Component {
     this.props.dispatch(actions.fetchGalleries())
   }
   render() {
-    if (!(this.props.galleries && this.props.user)) {
+    if (!this.props.galleries) {
       return <p>Loading galleries</p>
+    } else if (!this.props.user) {
+      return <UnauthHome />
     } else {
       const galleries = this.props.galleries.map((gallery, index) => {
         return <Gallery

@@ -8,6 +8,7 @@ import Gallery from '../gallery'
 import UserList from './userlist'
 import FollowButton from './follow-button'
 import UserFavorites from './favorites'
+import UnauthProfile from '../unauth-profile'
 
 import './profile.css'
 
@@ -16,7 +17,7 @@ export class UserProfile extends React.Component {
     super(props);
     this.state = {
       favorites: false,
-      followed: false,
+      followed: false
     };
   }
 
@@ -51,8 +52,10 @@ export class UserProfile extends React.Component {
 
   render() {
     if (!this.props.user) {
-      return <div>Loading page...</div>
+      console.log('not logged in')
+      return <UnauthProfile />
     } else {
+      console.log('logged in')
       const profile = this.props.profile;
 
       const galleries = profile.galleries.map((gallery, index) => {
