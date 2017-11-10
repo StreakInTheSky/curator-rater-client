@@ -23,25 +23,28 @@ export class Header extends React.Component{
 
     let accountMenu;
     let addGalleryLink;
+    let exploreLink;
 
     if (this.props.user) {
       accountMenu = <AccountMenu logOut={() => this.logOut()} />
-      addGalleryLink = <Link className="create-link" to="/curate">Create Gallery</Link>
+      addGalleryLink = <Link className="header-nav-item" to="/curate">Create Gallery</Link>
+      exploreLink = <Link to="/" className="header-nav-item">Explore</Link>
     } else if (this.props.location.pathname === '/login') {
       accountMenu = signUpButton
     } else if (this.props.location.pathname === '/signup') {
       accountMenu = loginButton
     } else {
-      accountMenu = <div>{loginButton} or {signUpButton}</div>
+      accountMenu = <div className="account-menu">{loginButton} {signUpButton}</div>
     }
 
     return (
       <header className="page-topper">
-        <Link to="/" className="logo-link"><h1 className="header-logo">Curator-Rater</h1><span className="home-text">home</span></Link>
+        <Link to="/" className="logo-link"><h1 className="header-logo">Curator-Rater</h1></Link>
         <div className="header-links">
+          {exploreLink}
           {addGalleryLink}
-          {accountMenu}
         </div>
+        {accountMenu}
       </header>
     )
   }

@@ -8,6 +8,7 @@
 
 .logo-link {
   position: relative;
+  margin-right: 10px;
 }
 
 .header-logo {
@@ -17,13 +18,6 @@
 
 .logo-link:hover {
   background-color: #FFF;
-}
-
-.home-text {
-  position: absolute;
-  right: 80%;
-  bottom: 10px;
-  text-decoration: underline;
 }
 
 .logo-link:hover span {
@@ -36,6 +30,8 @@
 }
 
 .account-menu {
+  position: relative;
+  right: 0;
   margin: 0;
   padding: 0;
 }
@@ -58,7 +54,6 @@
       padding: 5px;
       background-color: white;
       border: 1px solid grey;
-      font-size: .8em;
       color: grey;
       text-decoration: none;
       text-align: center;
@@ -66,7 +61,8 @@
     }
 
     .header-logo {
-      font-size: 3em;
+      font-size: 1.2em;
+      margin: 0;
     }
 
     .home-text {
