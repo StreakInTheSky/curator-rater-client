@@ -21,16 +21,20 @@
   padding: 0
 }
 
+.user-list-listing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
 .follow-button {
   padding: 5px;
   font-size: .8em;
   font-weight: normal;
-  position: static;
 }
 
-.follow-button{
-  float: right;
-}
+
 
 @media only screen and (max-width: 500px) {
     .modal-box {
