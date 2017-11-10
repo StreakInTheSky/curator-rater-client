@@ -142,6 +142,19 @@ button:disabled, button[disabled]:hover {
     }
 }
 
+@media (hover: none) {
+    a:hover {
+      color: inherit;
+      background-color: inherit;
+    }
+
+    button:hover, .mock-button:hover {
+      background-color: inherit;
+      color: inherit;
+      text-decoration: inherit;
+    }
+}
+
 /* Curate Page */
 
 .page-description {
