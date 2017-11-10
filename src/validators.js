@@ -21,5 +21,5 @@ export const matches = field => (value, allValues) =>
       : 'Does not match';
 export const noCaps = value =>
   value && /[^a-z0-9]/.test(value)
-    ? 'Only lowercase alphanumeric characters with no spaces'
+    ? 'Only lowercase alphanumeric characters with no spaces allowed'
     : undefined

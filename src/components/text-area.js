@@ -24,8 +24,6 @@ export default class TextArea extends React.Component {
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
-                    {error}
-                    {warning}
                 </label>
                 <textarea
                     {...this.props.input}

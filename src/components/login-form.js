@@ -20,12 +20,13 @@ export class LoginForm extends React.Component {
               onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
               )}>
-              <label htmlFor="email">email</label>
-              <Field component={Input}
+              <label className="login-form-label" htmlFor="email">email</label>
+              <Field
+                component={Input}
                 type="text"
                 name="email"
               />
-              <label htmlFor="password">Password</label>
+              <label className="login-form-label" htmlFor="password">Password</label>
               <Field
                 component={Input}
                 type="password"

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import './input.css'
+
+
 export default class Input extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.meta.active && this.props.meta.active) {
@@ -9,12 +12,12 @@ export default class Input extends React.Component {
 
     render() {
         let error;
-        if (this.props.meta.touched && this.props.meta.error) {
+        if ((this.props.meta.touched && this.props.meta.error) || (this.props.input.name === 'username' && this.props.meta.error && this.props.meta.dirty)) {
             error = <div className="form-error">{this.props.meta.error}</div>;
         }
 
         let warning;
-        if (this.props.meta.touched && this.props.meta.warning) {
+        if ((this.props.meta.touched && this.props.meta.warning) || (this.props.input.name === 'username' && this.props.meta.error  && this.props.meta.dirty)) {
             warning = (
                 <div className="form-warning">{this.props.meta.warning}</div>
             );
@@ -22,11 +25,12 @@ export default class Input extends React.Component {
 
         return (
             <div className="form-input">
-                <label htmlFor={this.props.input.name}>
+                {this.props.label ? <label className={this.props.labelClass} htmlFor={this.props.input.name}>
                     {this.props.label}
-                </label>
+                </label> : null}
                 <input
                     {...this.props.input}
+                    className={this.props.className}
                     id={this.props.input.name}
                     type={this.props.type}
                     ref={input => (this.input = input)}
@@ -34,7 +38,7 @@ export default class Input extends React.Component {
                 />
                 {error}
                 {warning}
-            </div>
+          </div>
         );
     }
 }
