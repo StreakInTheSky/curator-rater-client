@@ -40,6 +40,7 @@ export class UserProfile extends React.Component {
   }
 
   unfollowUser(userId) {
+    this.setState({ followed: false })
     this.props.dispatch(actions.unfollowUser(userId, this.props.user.id))
       .then(()=>console.log('unfollowed:', this.props.profile.username))
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))

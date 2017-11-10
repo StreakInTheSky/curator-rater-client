@@ -26,6 +26,7 @@ export class UserList extends React.Component {
   }
 
   unfollow(userId) {
+    this.setState({ followed: false })
     this.props.dispatch(actions.unfollowUser(userId, this.props.user.id))
   }
 

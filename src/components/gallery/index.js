@@ -31,6 +31,7 @@ export class Gallery extends React.Component {
   }
 
   removeFavorite(galleryId) {
+    this.setState({ favorited: false })
     this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.user.id))
   }
 
