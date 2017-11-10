@@ -16,7 +16,6 @@ export class RegistrationForm extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <form
         className="login-form"
@@ -56,6 +55,9 @@ export class RegistrationForm extends React.Component {
 
 export default reduxForm({
   form: 'registration',
-  onSubmitFail: (errors, dispatch) =>
-    dispatch(focus('registration', Object.keys(errors)[0]))
+  persistentSubmitErrors : true,
+  onSubmitFail: (error, dispatch) => {
+    console.log(error)
+    return dispatch(focus('registration', Object.keys(error)[0]))
+  }
 })(RegistrationForm);

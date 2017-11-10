@@ -52,10 +52,8 @@ export class UserProfile extends React.Component {
 
   render() {
     if (!this.props.user) {
-      console.log('not logged in')
       return <UnauthProfile />
     } else {
-      console.log('logged in')
       const profile = this.props.profile;
 
       const galleries = profile.galleries.map((gallery, index) => {
