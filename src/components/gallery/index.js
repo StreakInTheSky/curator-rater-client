@@ -21,6 +21,12 @@ export class Gallery extends React.Component {
     this.vote = this.vote.bind(this)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.gallery._id !== nextProps.gallery._id){
+      this.setState({currentImage: nextProps.gallery.images[0]})
+    }
+  }
+
   viewImage(imgIndex) {
     this.setState({currentImage: this.props.gallery.images[imgIndex]})
   }
