@@ -26,7 +26,12 @@
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.03em;
   position: relative;
-  top: -1px;
   cursor: pointer;
   box-sizing: border-box;
+}
+
+.page-hero .mock-button:hover {
+  background-color: #5bc7a0;
+  color: white;
+  border: 1px solid white;
 }
