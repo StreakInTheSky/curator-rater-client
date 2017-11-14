@@ -49,7 +49,7 @@ export class Gallery extends React.Component {
       })
     })
 
-    if (userImageIds.indexOf(imageId) >= 0) {
+    if (userImageIds.indexOf(imageId) !== -1) {
       alert("Can't vote for your own image")
     } else {
       this.props.dispatch(voteImage(imageId, this.props.user.id))
@@ -70,7 +70,7 @@ export class Gallery extends React.Component {
 
       const favoriteStar = this.props.ownGallery ? null : checkFavorited;
 
-      const galleryUsername = <p className="gallery-user"><h4><Link to={`/${user.username}`}>{user.username}</Link></h4></p>
+      const galleryUsername = <h4 className="gallery-user"><Link to={`/${user.username}`}>@{user.username}</Link></h4>
       const displayUsername = this.props.profileGallery ? null : galleryUsername
 
       return (

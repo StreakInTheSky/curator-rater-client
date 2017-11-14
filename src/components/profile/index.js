@@ -35,14 +35,12 @@ export class UserProfile extends React.Component {
   followUser(userId) {
     this.setState({ followed: true })
     this.props.dispatch(actions.followUser(userId, this.props.user.id))
-      .then(()=>console.log('followed:', this.props.profile.username))
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
   }
 
   unfollowUser(userId) {
     this.setState({ followed: false })
     this.props.dispatch(actions.unfollowUser(userId, this.props.user.id))
-      .then(()=>console.log('unfollowed:', this.props.profile.username))
       .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
   }
 
@@ -79,7 +77,7 @@ export class UserProfile extends React.Component {
               <h2 className="username">
                 {this.state.favorites
                   ? profileLink
-                  : profile.id === this.props.user.id ? 'My Profile' : profile.username
+                  : profile.id === this.props.user.id ? profile.username + ' (me)' : profile.username
                 }
               </h2>
               {profile.id === this.props.user.id ? null : <FollowButton
