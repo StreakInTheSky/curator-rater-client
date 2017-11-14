@@ -7,7 +7,7 @@ export function AccountMenu(props) {
   const username = props.user.username
   return(
     <ul className="account-menu">
-      <li className="account-menu-item"><Link to={`/${username}`}>My Profile</Link></li>
+      <li className="account-menu-item"><Link to={`/${username}`}>My Galleries</Link></li>
       <li className="account-menu-item"><div className="mock-button" onClick={props.logOut}>Log Out</div></li>
     </ul>
   )

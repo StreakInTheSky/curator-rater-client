@@ -29,6 +29,10 @@
   text-decoration-color: #5bc7a0;
 }
 
+.header-links * {
+  margin: 0 5px;
+}
+
 .account-menu {
   position: relative;
   right: 0;
