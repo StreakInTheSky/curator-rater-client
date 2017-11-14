@@ -15,7 +15,7 @@
   margin-right: 10px;
 }
 
-.follow-button {
+.follow-button, .big-button {
   padding: 8px 16px;
   font-size: 0.9em;
   background-color: #5bc7a0;

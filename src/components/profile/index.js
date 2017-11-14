@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import * as actions from '../../actions/profile'
 import ProfileMenu from './profile-menu'
@@ -66,6 +66,12 @@ export class UserProfile extends React.Component {
         />;
       });
 
+      const addGalleryButton = <Link className="mock-button big-button" to="/curate">&#65291;New Gallery</Link>
+
+      const displayGalleries = profile.id === this.props.user.id
+        ? <div>{addGalleryButton}{galleries}</div>
+        : <div>{galleries}</div>
+
       const followingIds = this.props.user.following.map(user => user._id)
       const profileLink = <span><a onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
 
@@ -93,7 +99,7 @@ export class UserProfile extends React.Component {
               toggleFavorites={(e)=>this.toggleFavorites(e)}
             />
           </section>
-          {this.state.favorites ? <UserFavorites /> : galleries}
+          {this.state.favorites ? <UserFavorites /> : displayGalleries}
         </main>
       )
     }
