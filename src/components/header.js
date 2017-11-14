@@ -60,8 +60,10 @@ export class Header extends React.Component{
       <header className="page-topper">
         <Link to="/" className="logo-link"><h1 className="header-logo">Curator-Rater</h1></Link>
         <MediaQuery maxWidth={500}>
-          <i className="fa fa-bars hamburger-button" aria-hidden="true" onClick={()=>this.showMenu()}></i>
-          {this.state.showMenu ? mobileMenu : null}
+          <div className="mobile-nav">
+            <i className="fa fa-bars hamburger-button" aria-hidden="true" onClick={()=>this.showMenu()}></i>
+            {this.state.showMenu ? mobileMenu : null}
+          </div>
         </MediaQuery>
         <MediaQuery minWidth={501}>
           <div className="header-links">
