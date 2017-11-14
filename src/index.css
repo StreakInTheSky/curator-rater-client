@@ -150,6 +150,8 @@ button:disabled, button[disabled]:hover {
     }
 }
 
+
+/* Remove hover styles on touch devices */
 @media (hover: none) {
     a:hover {
       color: inherit;
