@@ -5,10 +5,13 @@ import Gallery from './gallery'
 import UnauthHome from './unauth-home'
 import * as actions from '../actions/gallery'
 
+import './home.css'
+
 export class Home extends React.Component {
   componentWillMount() {
     this.props.dispatch(actions.fetchGalleries())
   }
+
   render() {
     if (!this.props.galleries) {
       return <p>Loading galleries</p>
@@ -28,6 +31,7 @@ export class Home extends React.Component {
 
       return (
         <div>
+          <h2>Explore</h2>
           <p className="page-description">Curate new galleries or rate some galleries by double clicking on your favorite images.</p>
           <main>
             {galleries}
