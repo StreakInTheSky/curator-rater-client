@@ -1,16 +1,14 @@
 .auth-form {
   width: 300px;
   margin: auto;
+  margin-top: 50px;
   padding: 30px;
   box-shadow: 1px 2px 4px #888888;
+  background-color: white;
 }
 
 .auth-form h2 {
   margin-top: 0;
-}
-
-.login-form {
-  /*text-align: center;*/
 }
 
 @media only screen and (max-width: 500px) {

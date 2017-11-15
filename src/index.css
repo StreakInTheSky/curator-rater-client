@@ -77,6 +77,21 @@ button:disabled, button[disabled]:hover {
   color: var(--light-grey);
 }
 
+.page-content {
+  margin-top: 0;
+}
+
+.page-header {
+  padding: 20px 10px 30px 10px;
+  background-color: white;
+}
+
+.page-title {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
 .hidden {
   display: none;
 }
@@ -131,6 +146,10 @@ button:disabled, button[disabled]:hover {
 
 
 @media only screen and (max-width: 500px) {
+    body {
+      background-color: white; 
+    }
+
     .container {
       width: 100%;
     }

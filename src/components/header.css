@@ -48,8 +48,17 @@
   padding: 0;
 }
 
+.account-menu-item .mock-button {
+  position: relative;
+  top: -2px;
+}
+
 @media only screen and (max-width: 500px) {
     .page-topper {
+      border-bottom: none;
+    }
+
+    .page-topper-container {
       width: 100vw;
       padding: 10px;
     }

@@ -44,9 +44,13 @@ export class Header extends React.Component{
         <li className="header-nav-item"><Link to="/curate" onClick={()=>this.showMenu()}>Create Gallery</Link></li>
       </ul>
     } else if (this.props.location.pathname === '/login') {
-      accountMenu = signUpButton
+      accountMenu = <ul className="account-menu">
+        <li className="account-menu-item">{signUpButton}</li>
+      </ul>
     } else if (this.props.location.pathname === '/signup') {
-      accountMenu = loginButton
+      accountMenu = <ul className="account-menu">
+        <li className="account-menu-item">{loginButton}</li>
+      </ul>
     } else {
       accountMenu = <ul className="account-menu">
         <li className="account-menu-item">{loginButton}</li>
