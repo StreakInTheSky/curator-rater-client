@@ -32,8 +32,8 @@ export class Header extends React.Component{
   }
 
   render() {
-    const loginButton = <Link to="/login" className="mock-button">Login</Link>
-    const signUpButton = <Link to="/signup" className="mock-button">Sign Up</Link>
+    const loginButton = <Link to="/login" className="mock-button" onClick={()=>this.showMenu()}>Login</Link>
+    const signUpButton = <Link to="/signup" className="mock-button" onClick={()=>this.showMenu()}>Sign Up</Link>
     let accountMenu;
     let navMenu;
 
