@@ -23,7 +23,7 @@ export class Gallery extends React.Component {
   render() {
     const { title, description, user, images } = this.props.gallery
 
-    const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>{user.username}</Link></p>
+    const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>@{user.username}</Link></p>
     const displayUsername = this.props.profileGallery ? null : galleryUsername
 
     return (
