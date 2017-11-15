@@ -33,8 +33,13 @@
 }
 
 .favorite-amount {
+  margin: 0;
   font-size: 0.9em;
   font-style: italic;
+}
+
+.gallery-user {
+  margin: 0;
 }
 
 .gallery-images {
