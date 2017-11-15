@@ -140,7 +140,7 @@ button:disabled, button[disabled]:hover {
       text-decoration: none;
     }
 
-    .page-description {
+    .page-title, .page-description {
       padding: 0 10px;
     }
 
