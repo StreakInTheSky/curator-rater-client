@@ -1,30 +1,37 @@
 .page-topper {
-  margin-bottom: 20px;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid var(--light-grey);
 }
 
-.page-topper * {
+.page-topper-container {
+  width: 80%;
+  margin: auto;
+  max-width: 1500px;
+  padding: 10px;
+}
+
+.page-topper-container * {
   display: inline-block;
 }
 
-.logo-link {
+.header-logo {
   position: relative;
-  margin-right: 10px;
+  margin: 0;
+  font-family: var(--logo-font), sans-serif;
+  font-size: 2em;
+  font-kerning: auto;
 }
 
-.header-logo {
+.logo-link {
   color: #000;
   background-color: #FFF;
+  text-decoration: none;
 }
 
 .logo-link:hover {
+  color: black;
   background-color: #FFF;
-}
-
-.logo-link:hover span {
-  display:none;
-}
-
-.logo-link:hover .header-logo {
   text-decoration: underline;
   text-decoration-color: #5bc7a0;
 }
@@ -43,27 +50,24 @@
 
 @media only screen and (max-width: 500px) {
     .page-topper {
-      width: 95%;
-      margin: auto;
-      margin-bottom: 20px;
-    }
-
-    .logo-link {
-      width: 100%;
-      margin: 0;
-      margin-top: 10px;
-      padding: 5px;
-      background-color: white;
-      border: 1px solid grey;
-      color: grey;
-      text-decoration: none;
-      text-align: center;
-      box-sizing: border-box;
+      width: 100vw;
+      padding: 10px;
     }
 
     .header-logo {
+      width: 100%;
+      margin: auto;
+      padding: 5px;
+      background-color: white;
+      border: 1px solid black;
+      text-align: center;
       font-size: 1.2em;
+    }
+
+    .logo-link {
       margin: 0;
+      color: black;
+      text-decoration: none;
     }
 
     .mobile-nav {

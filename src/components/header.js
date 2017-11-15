@@ -61,19 +61,21 @@ export class Header extends React.Component{
 
     return (
       <header className="page-topper">
-        <Link to="/" className="logo-link"><h1 className="header-logo">Curator-Rater</h1></Link>
-        <MediaQuery maxWidth={500}>
-          <div className="mobile-nav">
-            <i className="fa fa-bars hamburger-button" aria-hidden="true" onClick={()=>this.showMenu()}></i>
-            {this.state.showMenu ? mobileMenu : null}
-          </div>
-        </MediaQuery>
-        <MediaQuery minWidth={501}>
-          <div className="header-links">
-            {navMenu}
-            {accountMenu}
-          </div>
-        </MediaQuery>
+        <div className="page-topper-container">
+          <h1 className="header-logo"><Link to="/" className="logo-link">Curator-rater</Link></h1>
+          <MediaQuery maxWidth={500}>
+            <div className="mobile-nav">
+              <i className="fa fa-bars hamburger-button" aria-hidden="true" onClick={()=>this.showMenu()}></i>
+              {this.state.showMenu ? mobileMenu : null}
+            </div>
+          </MediaQuery>
+          <MediaQuery minWidth={501}>
+            <div className="header-links">
+              {navMenu}
+              {accountMenu}
+            </div>
+          </MediaQuery>
+        </div>
       </header>
     )
   }

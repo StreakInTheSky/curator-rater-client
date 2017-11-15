@@ -49,15 +49,17 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <Header />
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/signup" component={RegistrationPage} />
-          <Route path="/curate" component={CurateContainer} />
-          <Route path="/:username" component={UserProfile} />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={RegistrationPage} />
+            <Route path="/curate" component={CurateContainer} />
+            <Route path="/:username" component={UserProfile} />
+          </Switch>
+        </div>
         {/* TODO: add footer */}
       </div>
     );

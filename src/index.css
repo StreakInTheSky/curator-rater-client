@@ -1,16 +1,25 @@
 
 /* Global Styles */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300');
+
 :root {
   --header-color: #000;
   --text-color: #777;
   --light-grey: #CCC;
   --dark-grey: #444;
   --high-light-color: #5bc7a0;
+  --background-color: #fcfdf8;
+  --logo-font: 'Work Sans';
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  color: var(--text-color)
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -19,6 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
   width: 80%;
+  max-width: 1500px;
   margin: auto;
 }
 
@@ -122,7 +132,7 @@ button:disabled, button[disabled]:hover {
 
 @media only screen and (max-width: 500px) {
     .container {
-        width: 100%;
+      width: 100%;
     }
 
     button, .mock-button{

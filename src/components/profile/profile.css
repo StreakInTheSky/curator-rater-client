@@ -4,6 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  background-color: white;
+  padding: 10px;
 }
 
 .user-info {

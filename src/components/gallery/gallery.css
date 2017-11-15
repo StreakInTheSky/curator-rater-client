@@ -6,6 +6,9 @@
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: wrap;
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 .gallery-info {
@@ -27,6 +30,11 @@
 
 .favorite-star:hover, .favorited {
   color: #5bc7a0;
+}
+
+.favorite-amount {
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 .gallery-images {
@@ -135,6 +143,10 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .gallery {
+    padding: 0;
+  }
+
   .gallery-info {
     padding: 10px;
   }
