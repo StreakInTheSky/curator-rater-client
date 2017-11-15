@@ -38,17 +38,20 @@ export class Header extends React.Component{
     let navMenu;
 
     if (this.props.user) {
-      accountMenu = <AccountMenu logOut={() => this.logOut()} />
+      accountMenu = <AccountMenu logOut={()=>this.logOut()} showMenu={this.showMenu} />
       navMenu = <ul className="header-nav">
-        <li className="header-nav-item"><Link to="/">Explore</Link></li>
-        <li className="header-nav-item"><Link to="/curate">Create Gallery</Link></li>
+        <li className="header-nav-item"><Link to="/" onClick={()=>this.showMenu()}>Explore</Link></li>
+        <li className="header-nav-item"><Link to="/curate" onClick={()=>this.showMenu()}>Create Gallery</Link></li>
       </ul>
     } else if (this.props.location.pathname === '/login') {
       accountMenu = signUpButton
     } else if (this.props.location.pathname === '/signup') {
       accountMenu = loginButton
     } else {
-      accountMenu = <div className="account-menu">{loginButton} {signUpButton}</div>
+      accountMenu = <ul className="account-menu">
+        <li className="account-menu-item">{loginButton}</li>
+        <li className="account-menu-item">{signUpButton}</li>
+      </ul>
     }
 
     const mobileMenu = <div className="mobile-menu">
