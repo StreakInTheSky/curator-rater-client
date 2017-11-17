@@ -15,7 +15,8 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0]
+      currentImage: this.props.gallery.images[0],
+      showMoreInfo: false
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -61,6 +62,10 @@ export class Gallery extends React.Component {
     }
   }
 
+  toggleMoreInfo() {
+    this.setState({ showMoreInfo: !this.state.showMoreInfo })
+  }
+
   render() {
     if (!this.props.user) {
       return <p>Loading gallery...</p>
@@ -90,12 +95,12 @@ export class Gallery extends React.Component {
                 <p className="gallery-description">{description}</p>
                 {/* <Hashtags tags={tags} /> */}
               </MediaQuery>
-              {/*<MediaQuery maxWidth={500}>
+              <MediaQuery maxWidth={500}>
                 <div className="gallery-more-info">
-                  <div className="toggle-more-info">...</div>
-                  <p className="gallery-description">{description}</p>
+                  <div className="gallery-description more-info-toggle" onClick={()=>this.toggleMoreInfo()}>...</div>
+                  {this.state.showMoreInfo ? <p className="gallery-description">{description}</p> : null}
                 </div>
-              </MediaQuery>*/}
+              </MediaQuery>
             </div>
           <div className="gallery-images">
             <ImageViewer image={this.state.currentImage} vote={this.vote}/>

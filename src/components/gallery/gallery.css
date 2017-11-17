@@ -1,6 +1,6 @@
 /* Gallery */
 .gallery {
-  margin: 25px 0;
+  margin-bottom: 50px;
   width: 100%;
   min-height: 500px;
   display: flex;
@@ -65,7 +65,7 @@
 
 .gallery-user {
   margin: 0;
-  font-size: .9em;
+  font-size: .95em;
   color: var(--dark-grey);
 }
 
@@ -189,12 +189,30 @@
 @media only screen and (max-width: 500px) {
   .gallery {
     padding: 0;
-    margin-bottom: 50px;
   }
 
   .gallery-info {
     width: 100%;
+    margin: 0;
     padding: 10px;
+  }
+
+  .gallery-name {
+    font-size: 1.5em;
+  }
+
+  .gallery-user {
+    font-size: 1em;
+    margin: 5px 0;
+  }
+
+  .gallery-description {
+    margin: 0;
+  }
+
+  .more-info-toggle {
+    margin: 5px 0 0 0;
+    padding: 5px;
   }
 
   .gallery-image-viewer {

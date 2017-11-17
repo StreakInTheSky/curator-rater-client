@@ -150,6 +150,7 @@ button:disabled, button[disabled]:hover {
 @media only screen and (max-width: 500px) {
     body {
       background-color: white;
+      font-size: .95em;
     }
 
     .container {
