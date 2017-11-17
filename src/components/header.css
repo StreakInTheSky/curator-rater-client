@@ -21,7 +21,7 @@
   font-family: var(--logo-font), sans-serif;
   font-weight: 300;
   font-size: 2em;
-  font-kerning: auto;
+  letter-spacing: -0.5px;
 }
 
 .logo-link {

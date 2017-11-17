@@ -8,7 +8,7 @@ export default function Thumbnail(props) {
   const heart = props.isUpvoted ? <div className="heart">&#9829;</div> : null
 
   return (
-    <div className={props.selected ? "thumbnail-container selected" : "thumbnail-container"} onClick={toggleSelectImage}>
+    <div className={props.currentImage ? "thumbnail-container selected" : "thumbnail-container"} onClick={toggleSelectImage}>
       {heart}
       <img className="thumbnail" src={props.src} alt="" />
     </div>

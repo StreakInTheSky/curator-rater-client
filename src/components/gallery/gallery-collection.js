@@ -5,6 +5,7 @@ import Thumbnail from './gallery-thumbnail'
 export default function(props) {
   const images = props.images.map((image, index) => {
     return <Thumbnail
+            currentImage={image === props.currentImage ? true : false}
             src={image.path}
             index={index}
             key={image._id}

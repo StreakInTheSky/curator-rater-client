@@ -33,7 +33,7 @@ export class Home extends React.Component {
         <div className="page-content">
           <div className="page-header">
             <h2 className="page-title">Explore</h2>
-            <p className="page-description">Curate new galleries or rate some galleries by double clicking on your favorite images.</p>
+            <p className="page-description">Browse through every gallery, add some galleries to your favorites, or vote on your favorite images.</p>
           </div>
           <main>
             {galleries}

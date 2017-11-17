@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
+
 import * as actions from '../../actions/gallery'
 import { voteImage } from '../../actions/image'
 import ImageViewer from './gallery-viewer'
@@ -13,8 +15,7 @@ export class Gallery extends React.Component {
     super(props)
 
     this.state = {
-      currentImage: this.props.gallery.images[0],
-      favorited: false,
+      currentImage: this.props.gallery.images[0]
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -32,12 +33,16 @@ export class Gallery extends React.Component {
   }
 
   addFavorite(galleryId) {
-    this.setState({ favorited: true })
+    if (this.props.ownGallery) {
+      return alert("can't favorite your own gallery")
+    }
     this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.user.id))
   }
 
   removeFavorite(galleryId) {
-    this.setState({ favorited: false })
+    if (this.props.ownGallery) {
+      return alert("can't favorite your own gallery")
+    }
     this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.user.id))
   }
 
@@ -60,31 +65,41 @@ export class Gallery extends React.Component {
     if (!this.props.user) {
       return <p>Loading gallery...</p>
     } else {
-      const {title, description, user, images, _id, id} = this.props.gallery
+      const {title, description, user, images, _id, id, favorited_by} = this.props.gallery
       const favoriteIds = this.props.currentFavorites.map(gallery => gallery._id)
       const galleryId = id ? id : _id
 
-      const checkFavorited = favoriteIds.indexOf(galleryId) >= 0 || this.state.favorited
-      ? <span className="favorite-star favorited" onClick={()=>this.removeFavorite(galleryId)}>&#9733;</span>
-      : <span className="favorite-star" onClick={()=>this.addFavorite(galleryId)}>&#9734;</span>
+      const favoriteStar = favoriteIds.indexOf(galleryId) !== -1 || this.props.ownGallery
+      ? <span className="favorite-star favorited" title="remove from favorites" onClick={()=>this.removeFavorite(galleryId)} >&#9733;</span>
+      : <span className="favorite-star" title="Add to favorites" onClick={()=>this.addFavorite(galleryId)} >&#9734;</span>
 
-      const favoriteStar = this.props.ownGallery ? null : checkFavorited;
+      const favoritedInfo = <div className="favorited-info">{favoriteStar} {favorited_by.length}</div>
 
-      const galleryUsername = <h4 className="gallery-user"><Link to={`/${user.username}`}>@{user.username}</Link></h4>
+      const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>@{user.username}</Link></p>
       const displayUsername = this.props.profileGallery ? null : galleryUsername
 
       return (
         <div className="gallery">
-          <div className="gallery-info">
-            <h3 className="gallery-name">{title}</h3>
-            {favoriteStar}
-            {displayUsername}
-            <p className="gallery-description">{description}</p>
-            {/* <Hashtags tags={tags} /> */}
-          </div>
+            <div className="gallery-info">
+              <div className="gallery-header">
+                <h3 className="gallery-name">{title}</h3>
+                {favoritedInfo}
+              </div>
+              {displayUsername}
+              <MediaQuery minWidth={501}>
+                <p className="gallery-description">{description}</p>
+                {/* <Hashtags tags={tags} /> */}
+              </MediaQuery>
+              {/*<MediaQuery maxWidth={500}>
+                <div className="gallery-more-info">
+                  <div className="toggle-more-info">...</div>
+                  <p className="gallery-description">{description}</p>
+                </div>
+              </MediaQuery>*/}
+            </div>
           <div className="gallery-images">
             <ImageViewer image={this.state.currentImage} vote={this.vote}/>
-            <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted}/>
+            <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted} currentImage={this.state.currentImage}/>
           </div>
         </div>
       )
