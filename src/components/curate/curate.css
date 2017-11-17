@@ -33,10 +33,6 @@ form.curate-forms .input-group input {
   align-self: flex-end;
 }
 
-.thumbnail-container.selected {
-  border: 2px solid #5bc7a0;
-}
-
 .image-delete {
   display: inline-block;
   position: absolute;
