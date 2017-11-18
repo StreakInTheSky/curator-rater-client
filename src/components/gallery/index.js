@@ -103,7 +103,7 @@ export class Gallery extends React.Component {
               </MediaQuery>
             </div>
           <div className="gallery-images">
-            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.user.upvoted}/>
+            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.user.upvoted} />
             <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted} currentImage={this.state.currentImage}/>
           </div>
         </div>
