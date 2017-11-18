@@ -8,6 +8,7 @@ import * as actions from '../../actions/profile'
 import './userlist.css'
 
 export class UserList extends React.Component {
+  /* TODO:prevent listing from reordering when user unfollows and refollows someone */
   constructor(props) {
     super(props)
     this.state = {
