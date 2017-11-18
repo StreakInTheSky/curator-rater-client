@@ -16,7 +16,8 @@ export class Gallery extends React.Component {
 
     this.state = {
       currentImage: this.props.gallery.images[0],
-      showMoreInfo: false
+      showMoreInfo: false,
+      favorited: false
     }
 
     this.viewImage = this.viewImage.bind(this)
@@ -37,18 +38,18 @@ export class Gallery extends React.Component {
     if (this.props.ownGallery) {
       return alert("can't favorite your own gallery")
     }
-    this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.user.id))
+    this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.currentUser.id))
   }
 
   removeFavorite(galleryId) {
     if (this.props.ownGallery) {
       return alert("can't favorite your own gallery")
     }
-    this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.user.id))
+    this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.currentUser.id))
   }
 
   vote(imageId) {
-    this.props.dispatch(voteImage(imageId, this.props.user.id))
+    this.props.dispatch(voteImage(imageId, this.props.currentUser.id))
   }
 
   toggleMoreInfo() {
@@ -56,7 +57,7 @@ export class Gallery extends React.Component {
   }
 
   render() {
-    if (!this.props.user) {
+    if (!this.props.currentUser) {
       return <p>Loading gallery...</p>
     } else {
       const {title, description, user, images, _id, id, favorited_by} = this.props.gallery
@@ -92,8 +93,8 @@ export class Gallery extends React.Component {
               </MediaQuery>
             </div>
           <div className="gallery-images">
-            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.user.upvoted} />
-            <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted} currentImage={this.state.currentImage}/>
+            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.currentUser.upvoted} />
+            <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.currentUser.upvoted} currentImage={this.state.currentImage}/>
           </div>
         </div>
       )
@@ -101,8 +102,4 @@ export class Gallery extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  user: state.auth.currentUser
-})
-
-export default connect(mapStateToProps)(Gallery)
+export default connect()(Gallery)

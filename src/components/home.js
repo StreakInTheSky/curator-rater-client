@@ -25,7 +25,7 @@ export class Home extends React.Component {
           ownGallery={gallery.user._id === this.props.user.id ? true : null}
           profileGallery={false}
           currentFavorites={this.props.user.favorites}
-          currentUser={this.props.user.id}
+          currentUser={this.props.user}
         />;
       })
 
