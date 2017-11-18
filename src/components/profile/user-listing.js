@@ -9,7 +9,7 @@ export default function UserListing(props) {
   return (
       <li className="user-list-listing">
         <Link to={`/${props.username}`} >{props.username}</Link>
-        {props.myId === props.userId ? null : followButton}
+        {props.currentUserId === props.userId ? null : followButton}
       </li>
   )
 }

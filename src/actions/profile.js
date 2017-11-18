@@ -71,8 +71,9 @@ export const followUser = (followingId, myId) => dispatch => {
   return axios.post(url, { followingId, followerId: myId})
     .then(res => {
       dispatch(setCurrentUser(res.data.followingUser))
-      dispatch(fetchUserInfoSuccess(res.data.followedUser))
+      return res.data.followedUser
     })
+    .then(profileData => Promise.resolve(profileData))
     .catch(err => dispatch(followUserError(err)))
 }
 
@@ -81,7 +82,8 @@ export const unfollowUser = (followingId, myId) => dispatch => {
   return axios.post(url, { followingId, followerId: myId})
     .then(res => {
       dispatch(setCurrentUser(res.data.unfollowingUser))
-      dispatch(fetchUserInfoSuccess(res.data.unfollowedUser))
+      return res.data.unfollowedUser
     })
+    .then(profileData => Promise.resolve(profileData))
     .catch(err => dispatch(followUserError(err)))
 }

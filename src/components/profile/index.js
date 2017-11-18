@@ -32,10 +32,12 @@ export class UserProfile extends React.Component {
 
   followUser(userId) {
     this.props.dispatch(actions.followUser(userId, this.props.user.id))
+      .then(userData=>this.props.dispatch(actions.fetchUserInfoSuccess(userData)))
   }
 
   unfollowUser(userId) {
     this.props.dispatch(actions.unfollowUser(userId, this.props.user.id))
+      .then(userData=>this.props.dispatch(actions.fetchUserInfoSuccess(userData)))
   }
 
   toggleFavorites(e) {

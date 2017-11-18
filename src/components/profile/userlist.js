@@ -45,7 +45,7 @@ export class UserList extends React.Component {
                  following={following}
                  follow={(userId)=>this.follow(userId)}
                  unfollow={(userId)=>this.unfollow(userId)}
-                 myId={this.props.user.id}
+                 currentUserId={this.props.user.id}
                />
       })
     }
