@@ -48,18 +48,7 @@ export class Gallery extends React.Component {
   }
 
   vote(imageId) {
-    const userImageIds = [];
-    this.props.user.galleries.forEach((gallery) => {
-      gallery.images.forEach(image => {
-        userImageIds.push(image._id)
-      })
-    })
-
-    if (userImageIds.indexOf(imageId) !== -1) {
-      alert("Can't vote for your own image")
-    } else {
-      this.props.dispatch(voteImage(imageId, this.props.user.id))
-    }
+    this.props.dispatch(voteImage(imageId, this.props.user.id))
   }
 
   toggleMoreInfo() {
