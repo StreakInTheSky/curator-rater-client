@@ -1,25 +1,55 @@
 import React from 'react'
 
-export default function ImageViewer(props) {
-  const isUpvoted = props.userVotes.indexOf(props.image._id) !== -1;
-  const handleVotes = () => {
-    if (isUpvoted) {
-      alert('already voted')
-      return null;
+export default class ImageViewer extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      showHeart: false
     }
-    props.vote(props.image._id)
   }
 
-  const heart = isUpvoted
-  ? <div className="heart upvoted">&#9829;</div>
-  : <div className="heart" onClick={()=>handleVotes()} >&#9825;</div>
+  showHeart() {
+    this.setState({showHeart: true})
+  }
 
-  return (
-    <div className="gallery-image-viewer">
-      <div className="viewed-image-container">
-        <img className="viewed-image" src={props.image.path} alt="" onDoubleClick={()=>handleVotes()} />
-        {heart}
+  hideHeart() {
+    this.setState({showHeart: false})
+  }
+
+  render() {
+    const isUpvoted = this.props.userVotes.indexOf(this.props.image._id) !== -1;
+    const handleVotes = () => {
+      if (isUpvoted) {
+        alert('already voted')
+        return null;
+      }
+      this.props.vote(this.props.image._id)
+    }
+
+    const heart = isUpvoted
+    ? <div className="heart-container upvoted"
+      onMouseEnter={()=>this.showHeart()}
+      onMouseLeave={()=>this.hideHeart()}>
+        <span className="heart">&#9829;</span>
       </div>
-    </div>
-  )
+    : <div className="heart-container"
+      onMouseEnter={()=>this.showHeart()}
+      onMouseLeave={()=>this.hideHeart()} >
+        <span className="heart" onClick={()=>handleVotes()}>&#9825;</span>
+      </div>
+
+    return (
+      <div className="gallery-image-viewer">
+        <div className="viewed-image-container">
+          <img className="viewed-image"
+            src={this.props.image.path}
+            alt="" onDoubleClick={()=>handleVotes()}
+            onMouseEnter={()=>this.showHeart()}
+            onMouseLeave={()=>this.hideHeart()}
+          />
+          {this.state.showHeart ? heart : null }
+        </div>
+      </div>
+    )
+  }
 }
