@@ -1,4 +1,5 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 
 export default class ImageViewer extends React.Component {
   constructor(props){
@@ -47,7 +48,12 @@ export default class ImageViewer extends React.Component {
             onMouseEnter={()=>this.showHeart()}
             onMouseLeave={()=>this.hideHeart()}
           />
-          {this.state.showHeart ? heart : null }
+          <MediaQuery minWidth={501}>
+            {this.state.showHeart ? heart : null }
+          </MediaQuery>
+          <MediaQuery maxWidth={500}>
+            {heart}
+          </MediaQuery>
         </div>
       </div>
     )

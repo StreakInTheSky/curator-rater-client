@@ -220,6 +220,15 @@
     padding: 10px;
   }
 
+  .gallery-user {
+    font-size: 1em;
+    margin: 10px 0;
+  }
+
+  .favorite-star {
+    font-size: 1.8em;
+  }
+
   .gallery-name {
     font-size: 1.5em;
   }
@@ -257,6 +266,21 @@
     border: none;
     margin: auto;
     padding: 0;
+  }
+
+  .viewed-image-container .heart-container {
+    display: block;
+    position: absolute;
+    width: auto;
+    height: auto;
+    font-size: 2em;
+    bottom: 5px;
+    left: 5px;
+    color: var(--dark-grey);
+  }
+
+  .viewed-image-container .upvoted {
+    color: #FF0044;
   }
 
   .gallery-thumbnails {
