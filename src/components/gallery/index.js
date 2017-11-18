@@ -17,7 +17,6 @@ export class Gallery extends React.Component {
     this.state = {
       currentImage: this.props.gallery.images[0],
       showMoreInfo: false,
-      favorited: false,
       favoritedAmount: 0
     }
 
@@ -26,29 +25,12 @@ export class Gallery extends React.Component {
   }
 
   componentDidMount() {
-    this.checkFavorited(this.props.currentUser.favorites)
     this.setState({favoritedAmount: this.props.gallery.favorited_by.length})
   }
 
   componentWillReceiveProps(nextProps) {
     if(this.props.gallery._id !== nextProps.gallery._id){
       this.setState({currentImage: nextProps.gallery.images[0]})
-    }
-    this.checkFavorited(nextProps.currentUser.favorites)
-  }
-
-  checkFavorited(userFavorites) {
-    const galleryId = this.props.gallery._id ? this.props.gallery._id : this.props.gallery.id
-    const favoriteIds = userFavorites.map(gallery => {
-      if(gallery._id) {
-        return gallery._id
-      }
-      return gallery
-    })
-    if (favoriteIds.indexOf(galleryId) !== -1) {
-      this.setState({favorited: true})
-    } else {
-      this.setState({favorited: false})
     }
   }
 
@@ -84,12 +66,16 @@ export class Gallery extends React.Component {
     if (!this.props.currentUser) {
       return <p>Loading gallery...</p>
     } else {
-      // console.log('current user data:', this.props.currentUser)
       const {title, description, user, images, _id, id} = this.props.gallery
-      // const favoriteIds = this.props.currentUser.favorites.map(gallery => gallery._id)
       const galleryId = id ? id : _id
+      const favoriteIds = this.props.currentUser.favorites.map(gallery => {
+        if(gallery._id) {
+          return gallery._id
+        }
+        return gallery
+      })
 
-      const favoriteStar = this.state.favorited
+      const favoriteStar = favoriteIds.indexOf(galleryId) !== -1
       ? <span className="favorite-star favorited" title="remove from favorites" onClick={()=>this.removeFavorite(galleryId)} ><i className="fa fa-star" aria-hidden="true"></i></span>
       : <span className="favorite-star" title="Add to favorites" onClick={()=>this.addFavorite(galleryId)} ><i className="fa fa-star-o" aria-hidden="true"></i></span>
 
