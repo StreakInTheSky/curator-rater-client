@@ -116,6 +116,17 @@
   border: 12px solid var(--dark-grey);
 }
 
+.viewed-image-container .heart {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 200px;
+  color: rgba(240,0,55,0.7)
+}
+
 .hearts {
   position: absolute;
   bottom: 0;
