@@ -65,8 +65,8 @@ export class Gallery extends React.Component {
       const galleryId = id ? id : _id
 
       const favoriteStar = favoriteIds.indexOf(galleryId) !== -1
-      ? <span className="favorite-star favorited" title="remove from favorites" onClick={()=>this.removeFavorite(galleryId)} >&#9733;</span>
-      : <span className="favorite-star" title="Add to favorites" onClick={()=>this.addFavorite(galleryId)} >&#9734;</span>
+      ? <span className="favorite-star favorited" title="remove from favorites" onClick={()=>this.removeFavorite(galleryId)} ><i className="fa fa-star" aria-hidden="true"></i></span>
+      : <span className="favorite-star" title="Add to favorites" onClick={()=>this.addFavorite(galleryId)} ><i className="fa fa-star-o" aria-hidden="true"></i></span>
 
       const favoritedInfo = <div className="favorited-info">{favoriteStar} {favorited_by.length}</div>
 

@@ -30,12 +30,12 @@ export default class ImageViewer extends React.Component {
     ? <div className="heart-container upvoted"
       onMouseEnter={()=>this.showHeart()}
       onMouseLeave={()=>this.hideHeart()}>
-        <span className="heart">&#9829;</span>
+        <span className="heart"><i className="fa fa-heart" aria-hidden="true"></i></span>
       </div>
     : <div className="heart-container"
       onMouseEnter={()=>this.showHeart()}
       onMouseLeave={()=>this.hideHeart()} >
-        <span className="heart" onClick={()=>handleVotes()}>&#9825;</span>
+        <span className="heart" onClick={()=>handleVotes()}><i className="fa fa-heart-o" aria-hidden="true"></i></span>
       </div>
 
     return (

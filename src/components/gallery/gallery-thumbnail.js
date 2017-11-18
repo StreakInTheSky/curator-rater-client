@@ -25,8 +25,8 @@ export default class Thumbnail extends React.Component {
 
     const heartAmount = <span className="upvotes">{this.state.upvotes}</span>
     const heart = this.props.isUpvoted
-    ? <span className="heart upvoted">&#9829;</span>
-    : <span className="heart">&#9825;</span>
+    ? <span className="heart upvoted"><i className="fa fa-heart" aria-hidden="true"></i></span>
+    : <span className="heart"><i className="fa fa-heart-o" aria-hidden="true"></i></span>
 
     const hearts = <div className="hearts">{heart} {heartAmount}</div>
 
