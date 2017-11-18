@@ -36,14 +36,14 @@ export class Gallery extends React.Component {
 
   addFavorite(galleryId) {
     if (this.props.ownGallery) {
-      return alert("can't favorite your own gallery")
+      return null;
     }
     this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.currentUser.id))
   }
 
   removeFavorite(galleryId) {
     if (this.props.ownGallery) {
-      return alert("can't favorite your own gallery")
+      return null;
     }
     this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.currentUser.id))
   }
@@ -61,7 +61,7 @@ export class Gallery extends React.Component {
       return <p>Loading gallery...</p>
     } else {
       const {title, description, user, images, _id, id, favorited_by} = this.props.gallery
-      const favoriteIds = this.props.currentFavorites.map(gallery => gallery._id)
+      const favoriteIds = this.props.currentUser.favorites.map(gallery => gallery._id)
       const galleryId = id ? id : _id
 
       const favoriteStar = favoriteIds.indexOf(galleryId) !== -1
