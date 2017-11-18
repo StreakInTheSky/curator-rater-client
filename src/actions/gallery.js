@@ -29,10 +29,6 @@ export const removeFavoriteGalleryError = (error) => ({
 export const fetchGalleries = () => dispatch => {
   const url = `${API_BASE_URL}/gallery`
   axios.get(url)
-    .then(res => {
-      console.log('fetched galleries', res.data)
-      return res
-    })
     .then(res => dispatch(fetchGalleriesSuccess(res.data)))
     .catch(err => dispatch(fetchGalleriesError(err)))
 }
