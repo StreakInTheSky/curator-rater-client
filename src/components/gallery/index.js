@@ -74,7 +74,7 @@ export class Gallery extends React.Component {
       const favoriteIds = this.props.currentFavorites.map(gallery => gallery._id)
       const galleryId = id ? id : _id
 
-      const favoriteStar = favoriteIds.indexOf(galleryId) !== -1 || this.props.ownGallery
+      const favoriteStar = favoriteIds.indexOf(galleryId) !== -1
       ? <span className="favorite-star favorited" title="remove from favorites" onClick={()=>this.removeFavorite(galleryId)} >&#9733;</span>
       : <span className="favorite-star" title="Add to favorites" onClick={()=>this.addFavorite(galleryId)} >&#9734;</span>
 
@@ -103,7 +103,7 @@ export class Gallery extends React.Component {
               </MediaQuery>
             </div>
           <div className="gallery-images">
-            <ImageViewer image={this.state.currentImage} vote={this.vote}/>
+            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.user.upvoted}/>
             <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.user.upvoted} currentImage={this.state.currentImage}/>
           </div>
         </div>

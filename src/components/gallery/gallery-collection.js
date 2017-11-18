@@ -10,6 +10,7 @@ export default function(props) {
             index={index}
             key={image._id}
             imageId={image._id}
+            upvotes={image.upvoted_by}
             viewImage={props.viewImage}
             isUpvoted={props.userVotes.indexOf(image._id) >= 0}
           />
