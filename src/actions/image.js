@@ -12,10 +12,6 @@ export const voteImageError = err => ({
 export const voteImage = (imageId, userId) => dispatch => {
   const url = `${API_BASE_URL}/image/vote`
   return axios.post(url, {imageId, userId})
-    .then(res => {
-      console.log(res)
-      return res
-    })
     .then(res => dispatch(setCurrentUser(res.data)))
     .catch(err => dispatch(voteImageError(err)))
 }
