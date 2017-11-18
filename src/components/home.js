@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Gallery from './gallery'
-import UnauthHome from './unauth-home'
 import * as actions from '../actions/gallery'
 
 import './home.css'
@@ -13,10 +12,8 @@ export class Home extends React.Component {
   }
 
   render() {
-    if (!this.props.galleries) {
+    if (!this.props.galleries || !this.props.user) {
       return <p>Loading galleries</p>
-    } else if (!this.props.user) {
-      return <UnauthHome />
     } else {
       const galleries = this.props.galleries.map((gallery, index) => {
         return <Gallery
@@ -24,7 +21,6 @@ export class Home extends React.Component {
           gallery={gallery}
           ownGallery={gallery.user._id === this.props.user.id ? true : null}
           profileGallery={false}
-          currentFavorites={this.props.user.favorites}
           currentUser={this.props.user}
         />;
       })
