@@ -60,7 +60,7 @@ export class Gallery extends React.Component {
     if (this.props.ownGallery) {
       return null;
     }
-    this.setState({favoritedAmount: this.props.gallery.favorited_by.length + 1})
+    this.setState({favoritedAmount: this.state.favoritedAmount + 1})
     this.props.dispatch(actions.addFavoriteGallery(galleryId, this.props.currentUser.id))
   }
 
@@ -68,7 +68,7 @@ export class Gallery extends React.Component {
     if (this.props.ownGallery) {
       return null;
     }
-    this.setState({favoritedAmount: this.props.gallery.favorited_by.length - 1})
+    this.setState({favoritedAmount: this.state.favoritedAmount - 1})
     this.props.dispatch(actions.removeFavoriteGallery(galleryId, this.props.currentUser.id))
   }
 

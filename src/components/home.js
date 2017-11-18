@@ -11,6 +11,12 @@ export class Home extends React.Component {
     this.props.dispatch(actions.fetchGalleries())
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.history.length !== nextProps.history.length) {
+      this.props.dispatch(actions.fetchGalleries())
+    }
+  }
+
   render() {
     if (!this.props.galleries || !this.props.user) {
       return <p>Loading galleries</p>
