@@ -15,7 +15,7 @@ export class UserFavorites extends React.Component {
         gallery={gallery}
         ownGallery={profile.id === this.props.user.id ? true : null}
         currentFavorites={this.props.user.favorites}
-        currentUser={this.props.user.id}
+        currentUser={this.props.user}
       />;
     });
 
