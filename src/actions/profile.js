@@ -69,15 +69,19 @@ export const followUserError = (error) => ({
 export const followUser = (followingId, myId) => dispatch => {
   const url = `${API_BASE_URL}/user/follow`
   return axios.post(url, { followingId, followerId: myId})
-    .then(res => dispatch(setCurrentUser(res.data)))
-    .then(() => Promise.resolve())
+    .then(res => {
+      dispatch(setCurrentUser(res.data.followingUser))
+      dispatch(fetchUserInfoSuccess(res.data.followedUser))
+    })
     .catch(err => dispatch(followUserError(err)))
 }
 
 export const unfollowUser = (followingId, myId) => dispatch => {
   const url = `${API_BASE_URL}/user/unfollow`
   return axios.post(url, { followingId, followerId: myId})
-    .then(res => dispatch(setCurrentUser(res.data)))
-    .then(() => Promise.resolve())
+    .then(res => {
+      dispatch(setCurrentUser(res.data.unfollowingUser))
+      dispatch(fetchUserInfoSuccess(res.data.unfollowedUser))
+    })
     .catch(err => dispatch(followUserError(err)))
 }

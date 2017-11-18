@@ -8,7 +8,6 @@ import Gallery from '../gallery'
 import UserList from './userlist'
 import FollowButton from './follow-button'
 import UserFavorites from './favorites'
-import UnauthProfile from '../unauth-profile'
 
 import './profile.css'
 
@@ -16,8 +15,7 @@ export class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorites: false,
-      followed: false
+      favorites: false
     };
   }
 
@@ -33,15 +31,11 @@ export class UserProfile extends React.Component {
   }
 
   followUser(userId) {
-    this.setState({ followed: true })
     this.props.dispatch(actions.followUser(userId, this.props.user.id))
-      .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
   }
 
   unfollowUser(userId) {
-    this.setState({ followed: false })
     this.props.dispatch(actions.unfollowUser(userId, this.props.user.id))
-      .then(()=>this.props.dispatch(actions.fetchUserInfo(this.props.profile.username)))
   }
 
   toggleFavorites(e) {
@@ -50,8 +44,8 @@ export class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.props.user) {
-      return <UnauthProfile />
+    if (!this.props.user || !this.props.profile) {
+      return 'Loading page...'
     } else {
       const profile = this.props.profile;
 
@@ -61,19 +55,27 @@ export class UserProfile extends React.Component {
           gallery={gallery}
           ownGallery={profile.id === this.props.user.id ? true : null}
           profileGallery={profile.username === gallery.user.username ? true : null}
-          currentFavorites={this.props.user.favorites}
-          currentUser={this.props.user.id}
+          currentUser={this.props.user}
         />;
       });
 
       const addGalleryButton = <Link className="mock-button big-button" to="/curate">&#65291;New Gallery</Link>
 
-      const displayGalleries = profile.id === this.props.user.id
-        ? <div>{addGalleryButton}{galleries}</div>
-        : <div>{galleries}</div>
+      const followingIds = this.props.user.following.map(user => {
+          if (user._id) {
+            return user._id
+          }
+          return user
+        })
+      const profileLink = <span><a className="link-back-to-profile" onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
 
-      const followingIds = this.props.user.following.map(user => user._id)
-      const profileLink = <span><a onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
+      const chooseAddButton = profile.id === this.props.user.id
+        ? addGalleryButton
+        : <FollowButton
+          following={followingIds.indexOf(profile.id) !== -1 }
+          userId={profile.id}
+          follow={userId => this.followUser(userId)}
+          unfollow={userId => this.unfollowUser(userId)}/>
 
       return (
         <main className="content">
@@ -86,11 +88,7 @@ export class UserProfile extends React.Component {
                   : profile.id === this.props.user.id ? profile.username + ' (me)' : profile.username
                 }
               </h2>
-              {profile.id === this.props.user.id ? null : <FollowButton
-                following={followingIds.indexOf(profile.id) >= 0 || this.state.followed}
-                userId={profile.id}
-                follow={userId => this.followUser(userId)}
-                unfollow={userId => this.unfollowUser(userId)}/>}
+              {this.state.favorites ? null : chooseAddButton}
             </div>
             <ProfileMenu
               username={profile.username}
@@ -99,7 +97,7 @@ export class UserProfile extends React.Component {
               toggleFavorites={(e)=>this.toggleFavorites(e)}
             />
           </section>
-          {this.state.favorites ? <UserFavorites /> : displayGalleries}
+          {this.state.favorites ? <UserFavorites /> : galleries}
         </main>
       )
     }
