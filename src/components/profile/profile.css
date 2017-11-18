@@ -17,6 +17,10 @@
   margin-right: 10px;
 }
 
+.link-back-to-profile {
+  text-decoration: underline;
+}
+
 .follow-button, .big-button {
   padding: 8px 16px;
   font-size: 0.9em;
