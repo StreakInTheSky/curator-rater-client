@@ -8,11 +8,11 @@ import CurateUpload from './upload'
 import * as actions from '../../actions/curate'
 
 export class CurateFetch extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.fetchImages = this.fetchImages.bind(this)
-  }
+  // constructor(props){
+  //   super(props)
+  //
+  //   this.fetchImages = this.fetchImages.bind(this)
+  // }
 
   fetchImages(imageUrl) {
     this.props.dispatch(actions.fetchImage(imageUrl));
@@ -20,26 +20,25 @@ export class CurateFetch extends React.Component {
 
 
   render() {
+    const nav = <nav className="curate-page-nav">
+                  <span className={this.props.addedImagesLength ? 'mock-button' : 'mock-button-disabled' }
+                        onClick={()=>this.props.togglePage('details')}>
+                    Gallery Details &#62;
+                  </span>
+                </nav>
+
     return(
-      <div className="curate-contents curate-fetch transition-item">
-        <section className="curate-form-group">
-          <div className="page-description">
-            <p>Upload, or enter the url of the images you want to add to the gallery.</p>
-          </div>
+      <div className="curate-contents curate-fetch">
+        {nav}
+        <section className="curate-fetch-choices">
           {/* <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/> */}
           <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
         </section>
-        <nav className="curate-page-nav">
-          <Link className={this.props.addedImagesLength ? 'mock-button' : 'mock-button-disabled' } to={'/curate/details'} >Gallery Details &#62;</Link>
-        </nav>
+        {nav}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  addedImagesLength: state.curate.addedImages.length
-});
-
-export default connect(mapStateToProps)(CurateFetch);
+export default connect()(CurateFetch);

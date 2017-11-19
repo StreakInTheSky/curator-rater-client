@@ -14,18 +14,23 @@ export class CurateContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedIn: true
+      loggedIn: true,
+      page: 'fetch'
     }
 
-    this.deleteImage = this.deleteImage.bind(this)
-    this.viewImage = this.viewImage.bind(this)
-    this.unviewImage = this.unviewImage.bind(this)
+    // this.deleteImage = this.deleteImage.bind(this)
+    // this.viewImage = this.viewImage.bind(this)
+    // this.unviewImage = this.unviewImage.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
     if(!nextProps.user) {
       this.setState({ loggedIn: false })
     }
+  }
+
+  togglePage(page) {
+    this.setState({page: page})
   }
 
   deleteImage(imageIndex) {
@@ -43,30 +48,29 @@ export class CurateContainer extends React.Component {
     if (!this.state.loggedIn) {
       return <Redirect to="/" />
     }
-    return (
-      <main className="curate-main-container">
-        <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} />
-        <header className="main-header">
-          <h2>Curate</h2>
-        </header>
-        <div className="main-content">
-          {/* <PageTransition> */}
-            <Switch>
-              <Route path="/curate/fetch" component={CurateFetch} />
-              <Route path="/curate/details" component={CurateDetails} />
-            </Switch>
-          {/* </PageTransition> */}
+    console.log(this.state.page)
+    const mainContent = this.state.page === 'fetch'
+      ? <CurateFetch addedImagesLength={this.props.addedImages.length} togglePage={(page)=>this.togglePage(page)}/>
+      : <CurateDetails togglePage={(page)=>this.togglePage(page)}/>
 
-          <div className="curate-gallery">
-            <ImageGallery
-              images={this.props.addedImages}
-              deleteImage={this.deleteImage}
-              viewImage={this.viewImage}
-              unviewImage={this.unviewImage}
-              currentImage={this.props.currentImage} />
-          </div>
-        </div>
-      </main>
+    const galleryPreview = <ImageGallery
+                             images={this.props.addedImages}
+                             deleteImage={this.deleteImage}
+                             viewImage={this.viewImage}
+                             unviewImage={this.unviewImage}
+                             currentImage={this.props.currentImage}
+                           />
+    return (
+      <div className="page-content">
+        {/* <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} /> */}
+        <header className="page-header">
+          <h2 className="page-title">Curate</h2>
+        </header>
+        <main className="main-content">
+          {mainContent}
+          {this.props.addedImages.length > 0 ? galleryPreview : null}
+        </main>
+      </div>
     )
   }
 }

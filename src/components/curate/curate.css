@@ -1,10 +1,10 @@
-.curate-main-container {
-  width: 90vw;
-  margin: auto;
+.curate-contents > * {
+  padding: 20px 10px;
 }
 
-.curate-form-group {
-  min-height: 300px;
+.curate-fetch-choices {
+  display: flex;
+  flex-wrap: wrap
 }
 
 form.curate-forms {

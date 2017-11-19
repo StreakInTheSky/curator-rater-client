@@ -32,7 +32,7 @@ export class CurateDetails extends React.Component {
 
   render() {
     return(
-      <div className="curate-contents curate-details transition-item">
+      <div className="curate-contents curate-details">
         <section className="curate-form-group">
           <div className="page-description">
             <p>Add a title and description to your gallery.</p>
@@ -70,7 +70,7 @@ export class CurateDetails extends React.Component {
           </form>
         </section>
         <nav className="curate-page-nav">
-          <Link className="mock-button next-page" to={'/curate/fetch'} >&#60; Back</Link>
+          <span className="mock-button next-page" onClick={()=>this.props.togglePage('fetch')} >&#60; Back</span>
           <button
             type="submit"
             form="gallery-details"

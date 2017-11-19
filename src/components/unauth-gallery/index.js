@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
@@ -21,23 +22,36 @@ export class Gallery extends React.Component {
   }
 
   render() {
-    const { title, description, user, images } = this.props.gallery
+    const { title, description, user, images, favorited_by } = this.props.gallery
 
+    const favoritedAmount = favorited_by.length
     const galleryUsername = <p className="gallery-user"><Link to={`/${user.username}`}>@{user.username}</Link></p>
     const displayUsername = this.props.profileGallery ? null : galleryUsername
 
     return (
       <div className="gallery">
-        <div className="gallery-info">
-          <h3 className="gallery-name">{title}</h3>
-          {displayUsername}
-          <p className="gallery-description">{description}</p>
-          {/* <Hashtags tags={tags} /> */}
-        </div>
+        <MediaQuery minWidth={501}>
+          <div className="gallery-info">
+            <h3 className="gallery-name">{title}</h3>
+            <p className="favorite-amount">favorited by {favoritedAmount}</p>
+            {displayUsername}
+            <p className="gallery-description">{description}</p>
+            {/* <Hashtags tags={tags} /> */}
+          </div>
+        </MediaQuery>
         <div className="gallery-images">
           <ImageViewer image={this.state.currentImage}/>
           <GalleryCollection images={images} viewImage={this.viewImage} />
         </div>
+        <MediaQuery maxWidth={500}>
+          <div className="gallery-info">
+            <h3 className="gallery-name">{title}</h3>
+            <p className="favorite-amount">favorited by {favoritedAmount}</p>
+            {displayUsername}
+            <p className="gallery-description">{description}</p>
+            {/* <Hashtags tags={tags} /> */}
+          </div>
+        </MediaQuery>
       </div>
     )
 

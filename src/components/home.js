@@ -37,7 +37,7 @@ export class Home extends React.Component {
             <h2 className="page-title">Explore</h2>
             <p className="page-description">Browse through every gallery, add some galleries to your favorites, or vote on your favorite images.</p>
           </div>
-          <main>
+          <main className="main-content">
             {galleries}
           </main>
         </div>
