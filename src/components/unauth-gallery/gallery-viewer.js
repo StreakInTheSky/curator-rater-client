@@ -1,11 +1,13 @@
 import React from 'react'
 
-export default function ImageViewer(props) {
-  return (
-    <div className="gallery-image-viewer">
-      <div className="viewed-image-container">
-        <img className="viewed-image" src={props.image.path} alt="" />
+export default class ImageViewer extends React.Component {
+  render() {
+    return (
+      <div className="gallery-image-viewer">
+        <div className="viewed-image-container">
+          <img className="viewed-image" src={this.props.image.path} alt="" />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }

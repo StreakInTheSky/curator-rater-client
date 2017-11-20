@@ -17,6 +17,7 @@ export class UserList extends React.Component {
       return this.props[this.props.match.params.userlist].map((user, index) => {
         return <UserListing
                  username={user.username}
+                 userId={user._id}
                  key={index}
                />
       })

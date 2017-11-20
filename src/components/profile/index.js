@@ -8,6 +8,7 @@ import Gallery from '../gallery'
 import UserList from './userlist'
 import FollowButton from './follow-button'
 import UserFavorites from './favorites'
+import UnauthProfile from '../unauth-profile'
 
 import './profile.css'
 
@@ -46,7 +47,9 @@ export class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.props.user || !this.props.profile) {
+    if (!this.props.user) {
+      return <UnauthProfile />
+    } else if (!this.props.profile) {
       return 'Loading page...'
     } else {
       const profile = this.props.profile;

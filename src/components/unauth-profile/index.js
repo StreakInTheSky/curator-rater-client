@@ -33,45 +33,49 @@ export class UnauthProfile extends React.Component {
   }
 
   render() {
-    const profile = this.props.profile;
+    if (!this.props.profile) {
+      return 'Loading page...'
+    } else {
+      const profile = this.props.profile;
 
-    const galleries = profile.galleries.map((gallery, index) => {
-      return <Gallery
-        key={index}
-        gallery={gallery}
-        profileGallery={profile.username === gallery.user.username ? true : null}
-      />;
-    });
+      const galleries = profile.galleries.map((gallery, index) => {
+        return <Gallery
+          key={index}
+          gallery={gallery}
+          profileGallery={profile.username === gallery.user.username ? true : null}
+        />;
+      });
 
-    const profileLink = <span><a onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
+      const profileLink = <span><a className="link-back-to-profile" onClick={(e)=>this.toggleFavorites(e)} >{profile.username}</a>'s favorites</span>
 
-    return (
-      <main className="content">
-        <Route exact path="/:username/list/:userlist" component={UserList} />
-        <section className="profile-header">
-          <div className="user-info">
-            <h2 className="username">
-              {this.state.favorites
-                ? profileLink
-                : profile.username
-              }
-            </h2>
-          </div>
-          <ProfileMenu
-            username={profile.username}
-            following={profile.following}
-            followers={profile.followers}
-            toggleFavorites={(e)=>this.toggleFavorites(e)}
-          />
-        </section>
-        {this.state.favorites ? <UserFavorites favorites={profile.favorites} /> : galleries}
-      </main>
-    )
+      return (
+        <main className="content">
+          <Route exact path="/:username/list/:userlist" component={UserList} />
+          <section className="profile-header">
+            <div className="user-info">
+              <h2 className="username">
+                {this.state.favorites
+                  ? profileLink
+                  : profile.username
+                }
+              </h2>
+            </div>
+            <ProfileMenu
+              username={profile.username}
+              following={profile.following}
+              followers={profile.followers}
+              toggleFavorites={(e)=>this.toggleFavorites(e)}
+            />
+          </section>
+          {this.state.favorites ? <UserFavorites /> : galleries}
+        </main>
+      )
+    }
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  profile: state.profile
+const mapStateToProps = (state) => ({
+  profile: state.profile,
 });
 
 export default withRouter(connect(mapStateToProps)(UnauthProfile))

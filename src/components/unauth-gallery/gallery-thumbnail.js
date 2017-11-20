@@ -1,13 +1,38 @@
 import React from 'react'
 
-export default function Thumbnail(props) {
-  const toggleSelectImage = () => {
-    props.viewImage(props.index)
+export default class Thumbnail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      upvotes: 0
+    }
   }
 
-  return (
-    <div className={props.selected ? "thumbnail-container selected" : "thumbnail-container"} onClick={toggleSelectImage}>
-      <img className="thumbnail" src={props.src} alt="" />
-    </div>
-  )
-}
+  componentWillMount() {
+    this.setState({upvotes: this.props.upvotes.length})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(!this.props.isUpvoted && nextProps.isUpvoted) {
+      this.setState({upvotes: this.state.upvotes + 1})
+    }
+  }
+
+  render() {
+    const toggleSelectImage = () => {
+      this.props.viewImage(this.props.index)
+    }
+
+    const heartAmount = <span className="upvotes">{this.state.upvotes}</span>
+    const heart = <span className="heart upvoted"><i className="fa fa-heart" aria-hidden="true"></i></span>
+
+    const hearts = <div className="hearts">{heart} {heartAmount}</div>
+
+    return (
+      <div className={this.props.currentImage ? "thumbnail-container selected" : "thumbnail-container"} onClick={toggleSelectImage}>
+        {hearts}
+        <img className="thumbnail" src={this.props.src} alt="" />
+      </div>
+    )
+  }
+  }
