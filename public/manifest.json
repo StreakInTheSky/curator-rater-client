@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Curator-rater",
+  "name": "curater-rater-client 0.0.2",
   "icons": [
     {
       "src": "favicon.ico",
