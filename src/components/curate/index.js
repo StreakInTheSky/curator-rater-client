@@ -64,7 +64,6 @@ export class CurateContainer extends React.Component {
                            />
     return (
       <div className="page-content">
-        {/* <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} /> */}
         <header className="page-header">
           <h2 className="page-title">Curate</h2>
           <p className="page-description">{this.state.page === 'fetch' ? fetchDescription : detailsDescription }</p>
