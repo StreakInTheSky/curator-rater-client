@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './input.css'
+
 export default class TextArea extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.meta.active && this.props.meta.active) {
@@ -22,17 +24,15 @@ export default class TextArea extends React.Component {
 
         return (
             <div className="form-input">
-                <label htmlFor={this.props.input.name}>
-                    {this.props.label}
-                </label>
-                <textarea
-                    {...this.props.input}
-                    id={this.props.input.name}
-                    ref={textarea => (this.textarea = textarea)}
-                    value={this.props.input.value}
-                />
-                {error}
-                {warning}
+              <textarea
+                  {...this.props.input}
+                  className={this.props.className}
+                  id={this.props.input.name}
+                  ref={textarea => (this.textarea = textarea)}
+                  value={this.props.input.value}
+              />
+              {error}
+              {warning}
             </div>
         );
     }

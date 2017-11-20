@@ -25,9 +25,6 @@ export default class Input extends React.Component {
 
         return (
             <div className="form-input">
-                {this.props.label ? <label className={this.props.labelClass} htmlFor={this.props.input.name}>
-                    {this.props.label}
-                </label> : null}
                 <input
                     {...this.props.input}
                     className={this.props.className}

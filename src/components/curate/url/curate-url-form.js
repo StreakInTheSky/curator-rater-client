@@ -8,7 +8,7 @@ export default class CurateUrlForm extends React.Component {
 
   render() {
     return (
-      <form id="fetchImageFromUrl" className="curate-form" onSubmit={(event)=>this.props.fetchImageFromUrl(event, this.fetchImageInput.value)} >
+      <form id="fetchImageFromUrl" className="curate-fetch-form" onSubmit={(event)=>this.props.fetchImageFromUrl(event, this.fetchImageInput.value)} >
         {/* TODO* Allow option for multiple urls */}
         <div className="curate-form-field">
           <label className="curate-form-label">Image Url</label>

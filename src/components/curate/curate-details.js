@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../input';
 import TextArea from '../text-area';
-import {required, nonEmpty, isTrimmed} from '../../validators';
+import {required, nonEmpty, isTrimmed, length} from '../../validators';
 // import { WithContext as ReactTags } from 'react-tag-input';
 
 import * as actions from '../../actions/curate'
@@ -33,46 +33,42 @@ export class CurateDetails extends React.Component {
   render() {
     return(
       <div className="curate-contents curate-details">
-        <section className="curate-form-group">
-          <div className="page-description">
-            <p>Add a title and description to your gallery.</p>
+        <form
+          id="gallery-details"
+          className="curate-details-form"
+          onSubmit={this.props.handleSubmit(values =>
+            this.onSubmit(values)
+        )}>
+          <div className="curate-form-field curate-field-title">
+            <label className="curate-form-label" htmlFor="title">Title*</label>
+            <Field
+              className="curate-form-input"
+              component={Input}
+              type="text"
+              name="title"
+              validate={[required, nonEmpty, length({min: 2, max: 34}), isTrimmed]}
+            />
           </div>
-          <form
-            id="gallery-details"
-            className="curate-forms"
-            onSubmit={this.props.handleSubmit(values =>
-              this.onSubmit(values)
-          )}>
-            <div className="form-section">
-              <label htmlFor="title">Title*</label>
-              <Field
-                component={Input}
-                type="text"
-                name="title"
-                validate={[required, nonEmpty, isTrimmed]}
-              />
-            </div>
-            <div className="form-section">
-              <label htmlFor="description">Description</label>
-              <Field
-                component={TextArea}
-                type="textarea"
-                name="description"
-              />
-            </div>
-            {/* <label>Tags</label>
-            <ReactTags
-              tags={this.props.details.tags}
-              placeholder={null}
-              handleDelete={this.handleDelete}
-              handleAddition={this.handleAddition}
-              allowDeleteFromEmptyInput={false} /> */}
-          </form>
-        </section>
+          <div className="curate-form-field curate-field-description">
+            <label className="curate-form-label" htmlFor="description">Description</label>
+            <Field
+              className="curate-form-text-area"
+              component={TextArea}
+              type="textarea"
+              name="description"
+            />
+          </div>
+          {/* <label>Tags</label>
+          <ReactTags
+            tags={this.props.details.tags}
+            placeholder={null}
+            handleDelete={this.handleDelete}
+            handleAddition={this.handleAddition}
+            allowDeleteFromEmptyInput={false} /> */}
+        </form>
         <nav className="curate-page-nav">
           <span className="mock-button next-page" onClick={()=>this.props.togglePage('fetch')} >
-            <i className="fa fa-arrow-left" aria-hidden="true"></i>
-            Back
+            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
           </span>
           <button
             type="submit"
