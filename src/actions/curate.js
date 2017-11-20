@@ -102,7 +102,6 @@ export const submitGallery = galleryData => dispatch => {
   const {title, description, images, user} = galleryData
   const galleryDetails = { title, description, user }
   let gallery
-  console.log(AWS_ACCESS_KEY)
 
   return axios
     .post(`${API_BASE_URL}/gallery/`, { data: galleryDetails })
