@@ -16,6 +16,9 @@ export default class Thumbnail extends React.Component {
     if(!this.props.isUpvoted && nextProps.isUpvoted) {
       this.setState({upvotes: this.state.upvotes + 1})
     }
+    if(this.props.isUpvoted && !nextProps.isUpvoted) {
+      this.setState({upvotes: this.state.upvotes - 1})
+    }
   }
 
   render() {

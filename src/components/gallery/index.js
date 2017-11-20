@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
 import * as actions from '../../actions/gallery'
-import { voteImage } from '../../actions/image'
+import { voteImage, unvoteImage } from '../../actions/image'
 import ImageViewer from './gallery-viewer'
 import GalleryCollection from './gallery-collection';
 
@@ -22,6 +22,7 @@ export class Gallery extends React.Component {
 
     this.viewImage = this.viewImage.bind(this)
     this.vote = this.vote.bind(this)
+    this.unvote = this.unvote.bind(this)
   }
 
   componentDidMount() {
@@ -56,6 +57,10 @@ export class Gallery extends React.Component {
 
   vote(imageId) {
     this.props.dispatch(voteImage(imageId, this.props.currentUser.id))
+  }
+
+  unvote(imageId) {
+    this.props.dispatch(unvoteImage(imageId, this.props.currentUser.id))
   }
 
   toggleMoreInfo() {
@@ -104,7 +109,7 @@ export class Gallery extends React.Component {
               </MediaQuery>
             </div>
           <div className="gallery-images">
-            <ImageViewer image={this.state.currentImage} vote={this.vote} userVotes={this.props.currentUser.upvoted} />
+            <ImageViewer image={this.state.currentImage} vote={this.vote} unvote={this.unvote} userVotes={this.props.currentUser.upvoted} />
             <GalleryCollection images={images} viewImage={this.viewImage} userVotes={this.props.currentUser.upvoted} currentImage={this.state.currentImage}/>
           </div>
         </div>
