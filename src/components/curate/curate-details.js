@@ -70,7 +70,10 @@ export class CurateDetails extends React.Component {
           </form>
         </section>
         <nav className="curate-page-nav">
-          <span className="mock-button next-page" onClick={()=>this.props.togglePage('fetch')} >&#60; Back</span>
+          <span className="mock-button next-page" onClick={()=>this.props.togglePage('fetch')} >
+            <i className="fa fa-arrow-left" aria-hidden="true"></i>
+            Back
+          </span>
           <button
             type="submit"
             form="gallery-details"

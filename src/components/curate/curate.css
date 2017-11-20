@@ -54,28 +54,11 @@
 
 .curate-page-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.curate-page-nav button.next-page {
-  align-self: flex-end;
-}
-
-.image-delete {
-  display: inline-block;
-  position: absolute;
-  top: -2px;
-  right: 0;
-  z-index: 3;
-  cursor:default;
-}
-
-.image-delete:hover {
+.curate-page-nav span:hover .fa {
   color: var(--high-light-color);
-}
-
-.form-section {
-  width: 100%;
 }
 
 
@@ -95,50 +78,8 @@
   .curate-form-label {
     font-size: .9em;
   }
-}
 
-/* Instagram Pop-up */
-
-.instagram-images .thumbnail-container.selected {
-  left: -3px;
-	top: -3px;
-  box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.5);
-  transition: all .2s cubic-bezier(0, 1, 0.5, 1);
-}
-
-.instagram-gallery-container {
-  max-height: 0px;
-  transition: all 600ms ease-in;
-}
-
-.instagram-gallery-container.open {
-  max-height: 1000px;
-  transition: all 600ms ease-out;
-}
-
-.instagram-gallery-appear {
-  transform: translateY(-100%);
-}
-
-.instagram-gallery-appear.instagram-gallery-appear-active {
-  transform: translateY(0%);
-  transition: all 600ms ease-out;
-}
-
-.instagram-gallery-enter {
-  transform: translateY(-100%);
-}
-
-.instagram-gallery-enter.instagram-gallery-enter-active {
-	transform: translateY(0%);
-  transition: all 600ms ease-out;
-}
-
-.instagram-gallery-leave {
-  transform: translateY(0%);
-}
-
-.instagram-gallery-leave.instagram-gallery-leave-active {
-	transform: translateY(-100%);
-  transition: all 600ms ease-in;
+  .curate-page-nav {
+    padding: 0 10px;
+  }
 }

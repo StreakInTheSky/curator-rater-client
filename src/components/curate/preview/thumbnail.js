@@ -17,10 +17,12 @@ export default function Thumbnail(props) {
   const viewImage = () => { props.viewImage(props.index); }
 
   return (
+    <div className="thumbnail-surround">
+      <span className="image-delete" onClick={deleteImage}><i className="fa fa-trash-o" aria-hidden="true"></i></span>
       <div className={ checkIfSelected() ? "thumbnail-container selected" : "thumbnail-container"} onClick={viewImage} >
-        <span className="image-delete" onClick={deleteImage}>&#10005;</span>
         <img className="thumbnail" src={props.src} alt="" />
       </div>
+    </div>
 
   )
 }

@@ -3,7 +3,9 @@ import React from 'react'
 import Thumbnail from './thumbnail'
 import ImageViewer from './image-viewer'
 
-export default function ImageGallery(props) {
+import './preview.css'
+
+export default function GalleryPreview(props) {
   const images = props.images.map((image, index) => {
     return <Thumbnail
             src={image}
@@ -17,12 +19,12 @@ export default function ImageGallery(props) {
 
 
   return (
-    <section className={props.currentImage ? "gallery-images modal" : "gallery-images"} >
+    <section className={props.currentImage ? "gallery-preview modal" : "gallery-preview"} >
       <div className={props.currentImage ? "modal-background" : "hidden"} onClick={props.unviewImage} />
-      <div className="image-view-content">
-        <h5 className={props.currentImage ? "hidden" : "" }>Images in gallery:</h5>
+      <div className={props.currentImage ? "gallery-preview-modal" : "gallery-preview-content"}>
+        <h5 className={props.currentImage ? "hidden" : "gallery-preview-header" }>Gallery preview:</h5>
         <ImageViewer image={props.currentImage} unviewImage={props.unviewImage}/>
-        <div className="thumbnails">
+        <div className={props.currentImage ? "preview-thumbnails preview-thumbnails-modal" : "preview-thumbnails"}>
           {images}
         </div>
       </div>

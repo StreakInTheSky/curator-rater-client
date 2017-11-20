@@ -22,7 +22,7 @@ export class CurateFetch extends React.Component {
     const nav = <nav className="curate-page-nav">
                   <span className={this.props.addedImagesLength ? 'mock-button next' : 'mock-button-disabled next' }
                         onClick={()=>this.props.togglePage('details')}>
-                    Gallery Details &#62;
+                    Gallery Details <i className="fa fa-arrow-right" aria-hidden="true"></i>
                   </span>
                 </nav>
 

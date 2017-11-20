@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 // import PageTransition from 'react-router-page-transition';
 
-import ImageGallery from './preview/image-gallery'
+import GalleryPreview from './preview'
 import CurateFetch from './curate-fetch'
 import CurateDetails from './curate-details'
 import * as actions from '../../actions/curate'
@@ -52,10 +52,10 @@ export class CurateContainer extends React.Component {
       ? <CurateFetch addedImagesLength={this.props.addedImages.length} togglePage={(page)=>this.togglePage(page)}/>
       : <CurateDetails togglePage={(page)=>this.togglePage(page)}/>
 
-    const fetchDescription = 'Fetch your images either by url or  by uploading from your computer.'
+    const fetchDescription = 'Fetch your images by url or  by uploading from your device.'
     const detailsDescription = 'Add a title and a description to your gallery.'
 
-    const galleryPreview = <ImageGallery
+    const galleryPreview = <GalleryPreview
                              images={this.props.addedImages}
                              deleteImage={this.deleteImage}
                              viewImage={this.viewImage}
