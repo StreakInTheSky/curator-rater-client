@@ -152,7 +152,7 @@
 
 /* Gallery Thumbnails */
 .gallery-thumbnails {
-  max-width: 320px;
+  width: 320px;
   height: 100%;
   margin-left: 20px;
   flex-shrink: 2;
