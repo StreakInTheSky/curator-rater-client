@@ -8,7 +8,7 @@ import './index.css';
 
 import store from './store'
 import App from './components/app';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,4 +17,4 @@ ReactDOM.render(
     </Router>
   </Provider>
   , document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
