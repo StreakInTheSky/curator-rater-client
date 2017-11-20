@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import LandingPage from './landing'
 import Gallery from './gallery'
 import * as actions from '../actions/gallery'
-
-import './home.css'
 
 export class Home extends React.Component {
   componentWillMount() {
@@ -18,7 +17,9 @@ export class Home extends React.Component {
   }
 
   render() {
-    if (!this.props.galleries || !this.props.user) {
+    if (!this.props.user) {
+      return <LandingPage />
+    } else if (!this.props.galleries) {
       return <p>Loading galleries</p>
     } else {
       const galleries = this.props.galleries.map((gallery, index) => {
