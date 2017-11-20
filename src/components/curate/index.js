@@ -18,9 +18,9 @@ export class CurateContainer extends React.Component {
       page: 'fetch'
     }
 
-    // this.deleteImage = this.deleteImage.bind(this)
-    // this.viewImage = this.viewImage.bind(this)
-    // this.unviewImage = this.unviewImage.bind(this)
+    this.deleteImage = this.deleteImage.bind(this)
+    this.viewImage = this.viewImage.bind(this)
+    this.unviewImage = this.unviewImage.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
