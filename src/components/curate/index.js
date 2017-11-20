@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // import PageTransition from 'react-router-page-transition';
 
-import ImageGallery from './image-gallery'
+import ImageGallery from './preview/image-gallery'
 import CurateFetch from './curate-fetch'
 import CurateDetails from './curate-details'
 import * as actions from '../../actions/curate'
@@ -48,10 +48,12 @@ export class CurateContainer extends React.Component {
     if (!this.state.loggedIn) {
       return <Redirect to="/" />
     }
-    console.log(this.state.page)
     const mainContent = this.state.page === 'fetch'
       ? <CurateFetch addedImagesLength={this.props.addedImages.length} togglePage={(page)=>this.togglePage(page)}/>
       : <CurateDetails togglePage={(page)=>this.togglePage(page)}/>
+
+    const fetchDescription = 'Fetch your images either by url or  by uploading from your computer.'
+    const detailsDescription = 'Add a title and a description to your gallery.'
 
     const galleryPreview = <ImageGallery
                              images={this.props.addedImages}
@@ -65,6 +67,7 @@ export class CurateContainer extends React.Component {
         {/* <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} /> */}
         <header className="page-header">
           <h2 className="page-title">Curate</h2>
+          <p className="page-description">{this.state.page === 'fetch' ? fetchDescription : detailsDescription }</p>
         </header>
         <main className="main-content">
           {mainContent}

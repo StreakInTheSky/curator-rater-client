@@ -1,26 +1,30 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-import * as actions from '../../actions/curate'
+import CurateUploadForm from './curate-upload-form'
+import * as actions from '../../../actions/curate'
 
-export default function CurateUpload(props) {
+export class CurateUpload extends React.Component {
+  constructor(props) {
+    super(props)
+    this.uploadImages = this.uploadImages.bind(this)
+  }
 
-  const uploadImages = event => {
+  uploadImages(event) {
     const files = event.target.files
     for (let i = 0; i < files.length; i++) {
-      props.dispatch(actions.readFile(files[i]))
+      this.props.dispatch(actions.readFile(files[i]))
     }
   }
 
-  return (
-    <form id="uploadImage" className="curate-forms">
-      <label htmlFor="upload" className="mock-button" ><span>Upload</span></label>
-      <input id="upload" style={styles.upload} type="file" onChange={uploadImages} accept="image/*" multiple />
-    </form>
+  render() {
+    return (
+      <div className="curate-choice">
+        <p className="curate-choice-description">Upload files from you device.</p>
+          <CurateUploadForm uploadImages={this.uploadImages} />
+      </div>
     )
-}
-
-const styles = {
-  upload: {
-    display: 'none'
   }
 }
+
+export default connect()(CurateUpload)

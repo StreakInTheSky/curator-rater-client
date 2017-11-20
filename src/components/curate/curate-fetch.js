@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // import CurateInstagram from './instagram'
@@ -8,11 +7,11 @@ import CurateUpload from './upload'
 import * as actions from '../../actions/curate'
 
 export class CurateFetch extends React.Component {
-  // constructor(props){
-  //   super(props)
-  //
-  //   this.fetchImages = this.fetchImages.bind(this)
-  // }
+  constructor(props){
+    super(props)
+
+    this.fetchImages = this.fetchImages.bind(this)
+  }
 
   fetchImages(imageUrl) {
     this.props.dispatch(actions.fetchImage(imageUrl));
@@ -21,7 +20,7 @@ export class CurateFetch extends React.Component {
 
   render() {
     const nav = <nav className="curate-page-nav">
-                  <span className={this.props.addedImagesLength ? 'mock-button' : 'mock-button-disabled' }
+                  <span className={this.props.addedImagesLength ? 'mock-button next' : 'mock-button-disabled next' }
                         onClick={()=>this.props.togglePage('details')}>
                     Gallery Details &#62;
                   </span>
@@ -29,10 +28,9 @@ export class CurateFetch extends React.Component {
 
     return(
       <div className="curate-contents curate-fetch">
-        {nav}
         <section className="curate-fetch-choices">
           {/* <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/> */}
-          <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
+          <CurateUrl keyHandler={this.keyHandler} fetchImages={(url)=>this.fetchImages(url)} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
         </section>
         {nav}

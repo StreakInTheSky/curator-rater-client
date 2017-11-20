@@ -1,29 +1,25 @@
 import React from 'react'
 
+import CurateUrlForm from './curate-url-form'
+
 export default class CurateUrl extends React.Component {
   constructor(props) {
     super(props)
-
-    this.fetchImageInput = null
-
     this.fetchImageFromUrl = this.fetchImageFromUrl.bind(this)
   }
 
-  fetchImageFromUrl(event) {
+  fetchImageFromUrl(event, url) {
     event.preventDefault()
     // regex for valid url here
-    this.props.fetchImages(this.fetchImageInput.value)
+    this.props.fetchImages(url)
   }
 
   render() {
     return (
-      <divs
-      <p >
-      <form id="fetchImageFromUrl" className="curate-forms" onSubmit={this.fetchImageFromUrl}>
-        <label>Image Url</label>
-        <input type="url" ref={(input) => { this.fetchImageInput = input; }} required/>
-        <button type="submit">Fetch Image</button>
-      </form>
+      <div className="curate-choice">
+        <p className="curate-choice-description">Fetch image from url.</p>
+          <CurateUrlForm fetchImageFromUrl={this.fetchImageFromUrl} fetchImageInput={this.fetchImageInput}/>
+      </div>
     )
   }
 }
