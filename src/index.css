@@ -8,7 +8,8 @@
   --light-grey: #CCC;
   --lighter-grey: #F5F5F9;
   --dark-grey: #555;
-  --high-light-color: #5bc7a0;
+  --green: 90, 199, 160;
+  --high-light-color: rgb(var(--green));
   --logo-font: 'Work Sans';
 }
 
@@ -19,6 +20,7 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
   color: var(--text-color);
+  font-size: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -40,11 +42,15 @@ h3{ font-size: 1.25em }
 
 a {
   color: var(--text-color);
+  transition: ease-in-out 100ms;
+  transition-property:  background-color, color, border;
 }
 
 a:hover {
   background-color: #444;
   color: var(--light-grey);
+  transition: ease-in-out 100ms;
+  transition-property:  background-color, color, border;
 }
 
 button, .mock-button {
@@ -54,6 +60,8 @@ button, .mock-button {
   font-size: .8em;
   color: var(--text-color);
   text-decoration: none;
+  transition: ease-in-out 100ms;
+  transition-property:  background-color, color, border;
 }
 
 .mock-button-disabled {
@@ -71,6 +79,8 @@ button:hover, .mock-button:hover {
   color: white;
   text-decoration: none;
   cursor: pointer;
+  transition: ease-in-out 100ms;
+  transition-property:  background-color, color, border;
 }
 
 button:disabled, button[disabled]:hover {
