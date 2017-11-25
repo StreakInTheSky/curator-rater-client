@@ -1,9 +1,32 @@
-.page-hero {
-  text-align: center;
-  background-color: var(--text-color);
+.landing-page-content {
+  position: absolute;
+  width: 100%;
+  height: 94%;
+  left: 0;
+}
+
+.landing-page-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: white;
+  text-align: center;
+  padding: 50px;
+}
+
+.landing-page-section h2 {
+  color: white;
+}
+
+.page-hero {
+  width: 100%;
+  height: 25%;
   padding: 10px;
-  padding-bottom: 20px
+  padding-bottom: 20px;
+  background-color: var(--lighter-grey);
+  color: var(--dark-grey);
 }
 
 .page-hero .tagline {
@@ -16,22 +39,184 @@
   margin: 20px 0;
 }
 
-.page-hero .mock-button {
+.section-header {
+  margin: 0;
+}
+
+.section-tagline {
+  position: relative;
+  left: 5px;
+  width: 250px;
+  text-align: left;
+  line-height: 1.7em;
+}
+
+.tagline-text {
+  background-color: var(--text-color);
+  white-space: pre-wrap;
+  padding: 3px 9px 3px 0;
+}
+
+.tagline-text span {
+  position: relative;
+  left: 3px;
+}
+
+.landing-page-section .mock-button {
   padding: 8px 16px;
   font-size: 0.9em;
-  background-color: #5bc7a0;
-  color: white;
-  border: none;
+  background-color: var(--lighter-grey);
+  color: black;
+  border: 1px solid var(--lighter-grey);
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.03em;
   position: relative;
   cursor: pointer;
   box-sizing: border-box;
+  z-index: 2;
 }
 
-.page-hero .mock-button:hover {
-  background-color: #5bc7a0;
+.landing-page-section .mock-button:hover {
+  background-color: var(--dark-grey);
   color: white;
   border: 1px solid white;
+}
+
+.site-descriptions {
+  width: 100%;
+  height: 75%;
+  display: flex;
+}
+
+.path-choice {
+  margin: 0;
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.background-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.background .image-user {
+  position: absolute;
+  font-size: 0.8em;
+  background-color: var(--text-color);
+  padding: 2px;
+}
+
+.background .image-user a {
+  color: var(--lighter-grey);
+}
+
+.curate-path {
+  background-color: rgba(var(--green),0.6);
+  flex-grow: 1;
+  transition: flex-grow ease-in-out 250ms;
+}
+
+.rate-path {
+  background-color: rgba(240,0,55,0.7);
+  flex-grow: 1;
+  transition: flex-grow ease-in-out 250ms;
+}
+
+.rate-path:hover {
+  flex-grow: 3;
+  transition: flex-grow ease-in-out 250ms;
+}
+
+.curate-path:hover {
+  flex-grow: 3;
+  transition: flex-grow ease-in-out 250ms;
+}
+
+.curate-path .background-image {
+  background: url(https://curator-rater-images.s3-us-west-1.amazonaws.com/5a012c2c5e444b0012b4ce9815100292827812) no-repeat;
+  background-attachment: fixed;
+  background-position: right top;
+  background-size: cover;
+}
+
+.rate-path .background-image {
+  background: url(https://curator-rater-images.s3-us-west-1.amazonaws.com/5a0106eae21115001237e70215100174445992) no-repeat;
+  background-attachment: fixed;
+  background-position: left top;
+  background-size: cover;
+}
+
+@media only screen and (min-width: 501px) {
+  .background .image-user {
+    bottom: 0px;
+    left: 10px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .landing-page-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-hero {
+    width: 100%;
+    height: 25%;
+    padding: 10px;
+    padding-bottom: 20px;
+    background-color: white;
+  }
+
+  .site-descriptions {
+    flex-wrap: wrap;
+    height: 75%;
+  }
+
+  .path-choice {
+    width: 100%;
+    height: 50%;
+    padding: 5px;
+  }
+
+  .section-tagline {
+    margin: 5px auto;
+  }
+
+  .page-hero {
+   height: 23%;
+  }
+
+  .page-hero .tagline {
+    font-size: 1.5em;
+    margin: 5px auto;
+  }
+
+  .page-hero .sub-tagline {
+    margin: 5px auto;
+  }
+
+  .background .image-user {
+    top: -10px;
+    right: 5px;
+    background-color: transparent;
+    font-size: .7em;
+    color: var(--lighter-grey)
+  }
+
+  .curate-path .background-image {
+    background-attachment: local;
+    background-position: center;
+  }
+
+  .rate-path .background-image {
+    background-attachment: local;
+    background-position: center;
+  }
 }
