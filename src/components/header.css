@@ -9,13 +9,12 @@
   margin: auto;
   max-width: 1500px;
   padding: 10px;
-}
-
-.page-topper-container * {
-  display: inline-block;
+  display: flex;
+  align-items: baseline;
 }
 
 .header-logo {
+  display: inline-block;
   position: relative;
   margin: 0;
   font-family: var(--logo-font), sans-serif;
@@ -37,9 +36,18 @@
   text-decoration-color: #5bc7a0;
 }
 
+.header-links {
+  flex-grow: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.header-links ul, .header-links li {
+  display: inline-block;
+}
+
 .header-nav, .account-menu {
-  position: relative;
-  right: 0;
   margin: 0;
   padding: 0;
 }
@@ -62,6 +70,7 @@
     .page-topper-container {
       width: 100vw;
       padding: 10px;
+      display: block;
     }
 
     .header-logo {
